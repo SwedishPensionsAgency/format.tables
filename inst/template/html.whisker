@@ -1,0 +1,29 @@
+<div class="table">
+<span class="title">{{&caption}}</span><br />
+<span class="subtitle">{{&subcaption}}</span/>
+
+<table id="{{id}}">
+{{#tableRows}}
+  {{#header}}
+    <th class="{{style}}">
+      {{&tableRow}}
+    </th>
+  {{/header}}
+  {{^header}}
+    <tr class="{{style}}">
+      {{&tableRow}}
+    </tr>
+  {{/header}}
+{{/tableRows}}
+</table>
+
+<div class="notes">
+{{#tableNote}}
+<a name="{{id}}_note" class="notenumber">{{number}}</a> <span class="tablenote">{{tableNote}}</span><br />
+{{/tableNote}}
+{{#rowNotes}}
+<a name="{{id}}_{{number}}class="notenumber"">{{number}}</a> <span class="tablenote">{{note}}</span><br />
+{{/rowNotes}}
+</div>
+
+</div>

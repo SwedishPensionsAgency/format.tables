@@ -1,0 +1,17 @@
+style;1;rest
+header;<td>{{value}}{{#noteNumber}}<a href=""#{{id}}_{{noteNumber}}"" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{value}}</td>
+header-intable;<td>{{value}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{value}}</td>
+sum;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+subtotal-0;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+subtotal-1;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+subtotal-0-last;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+subtotal-1-last;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+bold-0;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+plain-0;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+plain-1;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+small-1;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+small-2;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+small-3;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+small-1-last;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+small-2-last;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
+small-3-last;<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>;<td>{{formated}}</td>
