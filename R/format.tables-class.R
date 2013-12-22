@@ -11,7 +11,7 @@
 #' @param names.note note for the column names, argument used to initialise class
 #' @param notes notes for the data, argument used to initialise class
 #' @param file the name of the file which the data are to be read from
-#' @param ... arguments passed to \code{\link[format.tables:read]{read}}
+#' @param ... arguments passed to \\code{\\link[format.tables:read]{read}}
 #' 
 #' @import whisker
 #' @aliases format.tables
@@ -79,13 +79,13 @@ format.tables <- setRefClass(
         stop("notes must be either NULL or of class character. The input was of class ", class(.self$notes), ".")
       }
       if (!is.null(.self$header) && class(.self$header) != "list"){
-        stop("invalid assignment for reference class field ‘header’, should be from class “list” or a subclass (was class '", class(header), "')")
+        stop("invalid assignment for reference class field \"header\", should be from class \u201clist\u201d or a subclass (was class '", class(header), "')")
       }
       if (!is.null(.self$column.names) && class(.self$column.names) != "character"){
-        stop("invalid assignment for reference class field ‘column.names’, should be from class “character” or a subclass (was class '", class(.self$column.names), "')")
+        stop("invalid assignment for reference class field \"column.names\", should be from class \u201ccharacter\u201d or a subclass (was class '", class(.self$column.names), "')")
       }
       if (!is.null(.self$names.style) && class(.self$names.style) != "character"){
-        stop("invalid assignment for reference class field ‘names.style’, should be from class “character” or a subclass (was class '", class(.self$names.style), "')")
+        stop("invalid assignment for reference class field \"names.style\", should be from class \u201ccharacter\u201d or a subclass (was class '", class(.self$names.style), "')")
       }
       
       if (nrow(.self$data) != length(.self$styles)){
@@ -269,7 +269,7 @@ format.tables <- setRefClass(
       }
       
       # read table template
-      table.template.whisker <- paste(readLines(table.template, warn = FALSE), collapse = "\n")
+      table.template.whisker <- paste(readLines(table.template, warn = FALSE), collapse = "\\n")
       
       
       # getting delimiter for whisker: used for fallback template if no row template is provided
@@ -295,10 +295,10 @@ format.tables <- setRefClass(
         )
       }
       
-      delimtag <- "\\{\\{=\\s*(.+?)\\s*=\\}\\}"
+      delimtag <- "\\\\{\\\\{=\\\\s*(.+?)\\\\s*=\\\\}\\\\}"
       rx <- rxsplit(table.template.whisker, delimtag)
 
-      whisker.delimiter <- unlist(strsplit(sub(delimtag, "\\1", rx[2]), " "))
+      whisker.delimiter <- unlist(strsplit(sub(delimtag, "\\\\1", rx[2]), " "))
       if (is.na(whisker.delimiter) || length(whisker.delimiter) == 0) whisker.delimiter <- c("{{", "}}")
       
       whisker.delimiter.change <- ""

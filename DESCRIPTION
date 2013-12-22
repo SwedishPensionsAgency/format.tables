@@ -6,6 +6,6 @@ Date: 2013-12-20
 Author: Cedric Perriard
 Maintainer: Cedric Perriard <cedric.perriard@pensionsmyndigheten.se>
 Description: ...
-License: AGPLv3
+License: AGPL-3
 Depends:
     whisker (>= 0.3-2)

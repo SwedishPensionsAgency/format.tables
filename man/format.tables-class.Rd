@@ -30,7 +30,7 @@
   read from}
 
   \item{...}{arguments passed to
-  \code{\link[format.tables:read]{read}}}
+  \\code{\\link[format.tables:read]{read}}}
 }
 \description{
 Class for format.tables
