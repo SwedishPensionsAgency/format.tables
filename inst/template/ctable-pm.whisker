@@ -1,0 +1,61 @@
+{{=<% %>=}}
+
+<%#firstColWidth%>\setlength\firstcolwidth{ <%&firstColWidth%> } <%/firstColWidth%>% 
+<%^firstColWidth%>\toggletrue{firstcolNoIntend} <%/firstColWidth%>% 
+\setcounter{colcount}{ <%&ncol%>-1}%
+\ctable[ %options
+<%#bgopacity%>bgopacity=<%&bgopacity%>, %
+<%/bgopacity%><%#botcap%>botcap, %
+<%/botcap%><%#caption%>caption={\relax{}<%&caption%><%#tableNote%>\tcapmark<%/tableNote%><%#subcaption%>\nl{}{\mdseries\color{black}<%&subcaption%> } <%/subcaption%> }, %
+<%/caption%><%#cap%>cap={\relax{}<%&cap%> }, %
+<%/cap%><%#captionskip%>captionskip=<%&captionskip%>, %
+<%/captionskip%><%#continued%>continued={\relax{}<%&continued%> }, %
+<%/continued%><%#doinside%>doinside=<%&doinside%>, %
+<%/doinside%><%#footerwidth%>footerwidth=<%&footerwidth%>, %
+<%/footerwidth%><%#framefg%>framefg=<%&framefg%>, %
+<%/framefg%><%#framebg%>framebg=<%&framebg%>, %
+<%/framebg%><%#framerule%>framerule=<%&framerule%>, %
+<%/framerule%><%#framesep%>framesep=<%&framesep%>, %
+<%/framesep%><%#label%>label={\relax{}<%&label%> }, %
+<%/label%><%#maxwidth%>maxwidth=<%&maxwidth%>, %
+<%/maxwidth%><%#mincapwidth%>mincapwidth=<%&mincapwidth%>, %
+<%/mincapwidth%><%#pos%>pos=<%&pos%>, %
+<%/pos%><%#width%>width=<%&width%>, %
+<%/width%><%#captionsleft%>captionsleft, %
+<%/captionsleft%><%#captionsright%>captionsright, %
+<%/captionsright%><%#captionsinside%>captionsinside, %
+<%/captionsinside%><%#center%>center, %
+<%/center%><%#figure%>figure, %
+<%/figure%><%#nonotespar%>nonotespar, %
+<%/nonotespar%><%#nosideways%>nosideways, %
+<%/nosideways%><%#nostar%>nostar, %
+<%/nostar%><%#nosuper%>nosuper, %
+<%/nosuper%><%#notespar%>notespar, %
+<%/notespar%><%#right%>right, %
+<%/right%><%#sidecap%>sidecap, %
+<%/sidecap%><%#sideways%>sideways, %
+<%/sideways%><%#star%>star, %
+<%/star%><%#super%>super, %
+<%/super%><%#table%>table, %
+<%/table%><%#topcap%>topcap, %
+<%/topcap%>
+]%
+{ % column definitions for \begin{tabular}
+@{}<%&colTypesOverride%><%^colTypesOverride%><%#firstColWidth%>b{\firstcolwidth} <%/firstColWidth%><%^firstColWidth%>X<%/firstColWidth%>*{\value{colcount} }{ <%&colType%> }<%/colTypesOverride%>@{}%
+}%
+{% table notes: zero or more \tnote commands
+<%#tableNote%>
+\tablenote{\relax{}<%&tableNote%> }
+<%/tableNote%>
+<%#rowNotes%>
+\tnote[<%&number%>]{\relax{}<%&note%> }%
+<%/rowNotes%>%
+}%
+{% rows for the table
+\toprulepm%
+<%#tableRows%>
+<%&tableRow%>\tabularnewline%
+<%#small-1-last%>\pmAddlinespaceV<%/small-1-last%><%#small-2-last%>\pmAddlinespaceV<%/small-2-last%><%#small-3-last%>\pmAddlinespaceV<%/small-3-last%><%#subtotal-0%>\pmAddlinespace<%/subtotal-0%><%#subtotal-1%>\pmAddlinespace<%/subtotal-1%>%
+<%/tableRows%> 
+\bottomrulepm%
+}%
