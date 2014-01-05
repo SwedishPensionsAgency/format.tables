@@ -1,5 +1,6 @@
 {{=<% %>=}}
 
+\begin{identity}%
 \ctable[ %options
 <%#bgopacity%>bgopacity=<%&bgopacity%>, %
 <%/bgopacity%><%#botcap%>botcap, %
@@ -55,3 +56,4 @@
 <%/tableRows%> 
 \bottomrule%
 }%
+\end{identity}%

@@ -1,5 +1,6 @@
 {{=<% %>=}}
 
+\begin{identity}%
 <%#firstColWidth%>\setlength\firstcolwidth{ <%&firstColWidth%> } <%/firstColWidth%>% 
 <%^firstColWidth%>\toggletrue{firstcolNoIntend} <%/firstColWidth%>% 
 \setcounter{colcount}{ <%&ncol%>-1}%
@@ -59,3 +60,4 @@
 <%/tableRows%> 
 \bottomrulepm%
 }%
+\end{identity}%
