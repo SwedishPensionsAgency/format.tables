@@ -1,22 +1,18 @@
 <div class="table">
-<span class="title">{{&caption}}</span><br />
-<span class="subtitle">{{&subcaption}}</span/>
-
-<table id="{{id}}">
-{{#tableRows}}
-  {{#header}}
-    <th class="{{style}}">
-      {{&tableRow}}
-    </th>
-  {{/header}}
-  {{^header}}
+<p><span class="caption">{{&caption}}</span><br />
+<span class="subcaption">{{&subcaption}}</span/></p>
+<table id="{{id}}">{{#tableRows}}{{#header}}
+  <thead>
     <tr class="{{style}}">
       {{&tableRow}}
     </tr>
-  {{/header}}
-{{/tableRows}}
+  </thead>{{/header}}{{/tableRows}}
+  <tbody>{{#tableRows}}{{^header}}
+    <tr class="{{style}}">
+      {{&tableRow}}
+    </tr>{{/header}}{{/tableRows}}
+  </tbody>
 </table>
-
 <div class="notes">
 {{#tableNote}}
 <a name="{{id}}_note" class="notenumber">{{number}}</a> <span class="tablenote">{{tableNote}}</span><br />
@@ -25,5 +21,4 @@
 <a name="{{id}}_{{number}}class="notenumber"">{{number}}</a> <span class="tablenote">{{note}}</span><br />
 {{/rowNotes}}
 </div>
-
 </div>
