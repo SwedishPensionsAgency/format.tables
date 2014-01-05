@@ -1,12 +1,9 @@
 {{=<% %>=}}
 
-<%#firstColWidth%>\setlength\firstcolwidth{ <%&firstColWidth%> } <%/firstColWidth%>% 
-<%^firstColWidth%>\toggletrue{firstcolNoIntend} <%/firstColWidth%>% 
-\setcounter{colcount}{ <%&ncol%>-1}%
 \ctable[ %options
 <%#bgopacity%>bgopacity=<%&bgopacity%>, %
 <%/bgopacity%><%#botcap%>botcap, %
-<%/botcap%><%#caption%>caption={\relax{}<%&caption%><%#tableNote%>\tcapmark<%/tableNote%><%#subcaption%>\nl{}{\mdseries\color{black}<%&subcaption%> } <%/subcaption%> }, %
+<%/botcap%><%#caption%>caption={\relax{}<%&caption%><%#tableNote%>*<%/tableNote%><%#subcaption%>\newline{}{\mdseries\color{black}<%&subcaption%> } <%/subcaption%> }, %
 <%/caption%><%#cap%>cap={\relax{}<%&cap%> }, %
 <%/cap%><%#captionskip%>captionskip=<%&captionskip%>, %
 <%/captionskip%><%#continued%>continued={\relax{}<%&continued%> }, %
@@ -41,7 +38,7 @@
 <%/topcap%>
 ]%
 { % column definitions for \begin{tabular}
-@{}<%&colTypesOverride%><%^colTypesOverride%><%#firstColWidth%>b{\firstcolwidth} <%/firstColWidth%><%^firstColWidth%>X<%/firstColWidth%>*{\value{colcount} }{ <%&colType%> }<%/colTypesOverride%>@{}%
+@{}<%&colTypesOverride%><%^colTypesOverride%><%#firstColWidth%>b{\firstcolwidth} <%/firstColWidth%>*{ <%&ncol%> }{ l }<%/colTypesOverride%>@{}%
 }%
 {% table notes: zero or more \tnote commands
 <%#tableNote%>
@@ -52,10 +49,9 @@
 <%/rowNotes%>%
 }%
 {% rows for the table
-\toprulepm%
+\toprule%
 <%#tableRows%>
 <%&tableRow%>\tabularnewline%
-<%#small-1-last%>\pmAddlinespaceV<%/small-1-last%><%#small-2-last%>\pmAddlinespaceV<%/small-2-last%><%#small-3-last%>\pmAddlinespaceV<%/small-3-last%><%#subtotal-0%>\pmAddlinespace<%/subtotal-0%><%#subtotal-1%>\pmAddlinespace<%/subtotal-1%>%
 <%/tableRows%> 
-\bottomrulepm%
+\bottomrule%
 }%

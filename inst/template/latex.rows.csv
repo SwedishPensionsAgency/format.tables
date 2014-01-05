@@ -1,17 +1,3 @@
-style;1;rest
-header;\pmBoldLabel{0em}{ <%&value%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmBold{ <%&value%> }
-header-intable;\pmBoldSpaceLabel{0em}{ <%&value%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmBold{ <%&value%> }
-sum;\pmSum{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmBold{ <%&formated%> }
-subtotal-0;\pmSubtotal{0em}{ <%&ncol%> }{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmBold{ <%&formated%> }
-subtotal-1;\pmSubtotal{1em}{ <%&ncol%> }{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmBold{ <%&formated%> }
-subtotal-0-last;\pmSubtotalLast{0em}{ <%&ncol%> }{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmBold{ <%&formated%> }
-subtotal-1-last;\pmSubtotalLast{1em}{ <%&ncol%> }{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmBold{ <%&formated%> }
-bold-0;\pmBoldLabel{0em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmBold{ <%&formated%> }
-plain-0;\pmPlainLabel{0em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmPlain{ <%&formated%> }
-plain-1;\pmPlainLabel{1em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmPlain{ <%&formated%> }
-small-1;\pmSmallLabel{1em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmSmall{ <%&formated%> }
-small-2;\pmSmallLabel{2em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmSmall{ <%&formated%> }
-small-3;\pmSmallLabel{3em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmSmall{ <%&formated%> }
-small-1-last;\pmSmallLabelLast{1em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmSmall{ <%&formated%> }
-small-2-last;\pmSmallLabelLast{2em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmSmall{ <%&formated%> }
-small-3-last;\pmSmallLabelLast{3em}{ <%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%> };\pmSmall{ <%&formated%> }
+style,1,rest
+header,{\bfseries <%&value%> }<%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>,{\bfseries <%&value%> }
+plain,<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>,<%&formated%>
