@@ -228,7 +228,7 @@ format.tables <- setRefClass(
     #' see the file render.R for documentation 
     render = function(table.template = NULL, 
                       row.template = NULL, 
-                      type = "latex",
+                      type = "tex",
                       collapse = NULL,
                       sep = ",", 
                       ...){
@@ -243,11 +243,11 @@ format.tables <- setRefClass(
       
       # type specific 
       collapse.tmp <- ""
-      if (type == "latex"){
+      if (type == "tex"){
         if (is.null(table.template))
           table.template <- system.file("template", "ctable.whisker", package = getPackageName())
         if (is.null(row.template))
-          row.template <- system.file("template", "latex.rows.csv", package = getPackageName())
+          row.template <- system.file("template", "tex.rows.csv", package = getPackageName())
         collapse.tmp <- " & "
       }else if (type == "html"){
         if (is.null(table.template))
@@ -260,7 +260,7 @@ format.tables <- setRefClass(
           stop("If you choose 'type = \"\"' you must provide both table.template and row.template.")
         }
       }else{
-        stop("'type' must be 'latex', 'html' or an empty string.")
+        stop("'type' must be 'tex', 'html' or an empty string.")
       }
       
       if(is.null(collapse)){
