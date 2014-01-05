@@ -11,7 +11,7 @@
 #' @param names.note note for the column names, argument used to initialise class
 #' @param notes notes for the data, argument used to initialise class
 #' @param file the name of the file which the data are to be read from
-#' @param ... arguments passed to \\code{\\link[format.tables:read]{read}}
+#' @param ... arguments passed to \code{\link[format.tables:read]{read}}
 #' 
 #' @import whisker
 #' @aliases format.tables
