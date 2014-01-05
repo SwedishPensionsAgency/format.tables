@@ -131,13 +131,12 @@ format.tables <- setRefClass(
                     na.strings = "", 
                     ...){
       
-      #browser()
       #initialize variables 
-      header <- NULL
-      notes <- NULL
-      column.names <- NULL
-      names.style <- NULL
-      names.note <- NULL
+      .header <- NULL
+      .notes <- NULL
+      .column.names <- NULL
+      .names.style <- NULL
+      .names.note <- NULL
       
       raw <- read.table(file, 
                         na.strings = na.strings, 
@@ -152,8 +151,8 @@ format.tables <- setRefClass(
         #header: keys -> values 
         header.df <- raw[1:separation.index-1, c(1,2)]
         names(header.df) <- c("keys", "values")
-        header <- as.list(header.df$values)
-        names(header) <- header.df$keys
+        .header <- as.list(header.df$values)
+        names(.header) <- header.df$keys
         
         #delete the header and keep just the data with styles and notes columns 
         raw <- raw[-(1:separation.index), ]
@@ -162,13 +161,13 @@ format.tables <- setRefClass(
       if(!isTRUE(raw[1, 1] == "styles")){
         stop("There is no style column in your data. Please add one and name it with 'styles'. ")
       }
-      styles <- raw[2:nrow(raw), 1]
+      .styles <- raw[2:nrow(raw), 1]
       raw[, 1] <- NULL
       
       #notes 
       if (isTRUE(raw[1, ncol(raw)] == "notes")){
-        notes <- raw[2:nrow(raw), ncol(raw)]
-        notes[is.na(notes)] <- ""
+        .notes <- raw[2:nrow(raw), ncol(raw)]
+        .notes[is.na(.notes)] <- ""
         raw[, ncol(raw)] <- NULL
       }
       
@@ -178,36 +177,36 @@ format.tables <- setRefClass(
       
       #column names
       if(has.column.names){
-        column.names <- as.character(raw[1, ])
-        column.names[is.na(column.names)] <- ""
-        names.style <- styles[1]
-        styles <- styles[-1]
-        names.note <- notes[1]
-        if(!is.null(names.note)) names.note[is.na(names.note)] <- ""
-        notes <- notes[-1]
+        .column.names <- as.character(raw[1, ])
+        .column.names[is.na(.column.names)] <- ""
+        .names.style <- styles[1]
+        .styles <- .styles[-1]
+        .names.note <- .notes[1]
+        if(!is.null(.names.note)) .names.note[is.na(.names.note)] <- ""
+        .notes <- .notes[-1]
         raw <- raw[-1, ]
       }
       
       #data
-      data <- raw
+      .data <- raw
       if (convert.data){
-        for (i in 1:ncol(data)){
-          col <- type.convert(as.character(data[, i]), dec = dec)
+        for (i in 1:ncol(.data)){
+          col <- type.convert(as.character(.data[, i]), dec = dec)
           if (class(col) != "factor"){
-            data[, i] <- col
+            .data[, i] <- col
           }else{
-            data[, i] <- as.character(data[, i])
+            .data[, i] <- as.character(.data[, i])
           }
         }
       }
       
-      .self$data <- data
-      .self$styles <- styles
-      .self$column.names <- column.names
-      .self$names.style <- names.style
-      .self$header <- header
-      .self$names.note <- names.note
-      .self$notes <- notes
+      .self$data <- .data
+      .self$styles <- .styles
+      .self$column.names <- .column.names
+      .self$names.style <- .names.style
+      .self$header <- .header
+      .self$names.note <- .names.note
+      .self$notes <- .notes
       
       
       
@@ -233,7 +232,7 @@ format.tables <- setRefClass(
                       collapse = NULL,
                       sep = ",", 
                       ...){
-      
+
       # table id: can be used per row or in table template
       table.id <- .self$header$id
       if (is.null(table.id)){
@@ -269,7 +268,7 @@ format.tables <- setRefClass(
       }
       
       # read table template
-      table.template.whisker <- paste(readLines(table.template, warn = FALSE), collapse = "\\n")
+      table.template.whisker <- paste(readLines(table.template, warn = FALSE), collapse = "\n")
       
       
       # getting delimiter for whisker: used for fallback template if no row template is provided
@@ -295,10 +294,10 @@ format.tables <- setRefClass(
         )
       }
       
-      delimtag <- "\\\\{\\\\{=\\\\s*(.+?)\\\\s*=\\\\}\\\\}"
+      delimtag <- "\\{\\{=\\s*(.+?)\\s*=\\}\\}"
       rx <- rxsplit(table.template.whisker, delimtag)
 
-      whisker.delimiter <- unlist(strsplit(sub(delimtag, "\\\\1", rx[2]), " "))
+      whisker.delimiter <- unlist(strsplit(sub(delimtag, "\\1", rx[2]), " "))
       if (is.na(whisker.delimiter) || length(whisker.delimiter) == 0) whisker.delimiter <- c("{{", "}}")
       
       whisker.delimiter.change <- ""
@@ -388,10 +387,10 @@ format.tables <- setRefClass(
       # notes
       rowNotes <- NULL
       if (!is.null(.self$notes)){
-        notes <- c(.self$names.note, .self$notes)
-        notes <- notes[!is.na(notes) & notes != ""]
-        names(notes) <- 1:length(notes)
-        rowNotes <- list(rowNotes = iteratelist(notes, name = "number", value = "note"))
+        .notes <- c(.self$names.note, .self$notes)
+        .notes <- .notes[!is.na(.notes) & .notes != ""]
+        names(.notes) <- 1:length(.notes)
+        rowNotes <- list(rowNotes = iteratelist(.notes, name = "number", value = "note"))
         for (i in 1:length(rowNotes$rowNotes)){
           rowNotes$rowNotes[[i]]$id <- table.id
         }
