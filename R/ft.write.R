@@ -67,7 +67,7 @@ ft.write <- function(data, file = "", ...){
   if (file == ""){
     print(export.data)
   }else{
-    write.table(x = export.data, file = file, ...)
+    write.table(x = export.data, file = file, row.names = FALSE, ...)
   }
   
 }
