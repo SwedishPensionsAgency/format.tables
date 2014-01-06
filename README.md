@@ -7,7 +7,7 @@ Formatting tables with R for LaTeX and HTML
 
 Use `devtools` for easy installation:
 
-    devtools::install_github('Coldbir', 'SthlmR')
+    devtools::install_github('format.tables', 'SwedishPensionsAgency')
     
 ## Usage 
     
