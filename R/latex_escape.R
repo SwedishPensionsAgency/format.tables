@@ -5,6 +5,7 @@
 #' 
 #' @param x character vector, list, data frame, or data table
 #' 
+#' @import data.table
 #' @export
 latex_escape <- function(x){
   out <- lapply(x, function(x){
@@ -20,7 +21,7 @@ latex_escape <- function(x){
     return(out)
   })
   if ("data.table" %in% class(x)){
-    out <- as.data.table(out)
+    out <- data.table::as.data.table(out)
   }else if (is.data.frame(x)){
     out <- as.data.frame(out)
   }else if (class(x) == "list"){

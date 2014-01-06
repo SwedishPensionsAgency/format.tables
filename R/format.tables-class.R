@@ -14,6 +14,7 @@
 #' @param ... arguments passed to \code{\link[format.tables:read]{read}}
 #' 
 #' @import whisker
+#' @import methods
 #' @aliases format.tables
 #' 
 #' @export

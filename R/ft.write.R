@@ -4,12 +4,13 @@
 #' 
 #' @param data data in ft.data format, containing tabular data in a data frame, column names, styles, notes, and header
 #' @param file either a character string naming a file or a  \code{\link{connection}} open for writing. "" indicates output to the console
+#' @param dec the string to use for decimal points in numeric or complex columns: must be a single character.
 #' @param ... parameters passed to \code{\link{write.table}}
 #' 
 
 
 
-ft.write <- function(data, file = "", ...){
+ft.write <- function(data, file = "", dec= ".", ...){
   
   if(!getPackageName() %in% class(data)){
     stop("data is not of class format.tables, the function supports only format.tables ")
@@ -21,7 +22,7 @@ ft.write <- function(data, file = "", ...){
   for (i in 1:ncol(export.data)){
     if(class(export.data[, i]) != "character"){
       export.data[, i] <- format(export.data[, i], 
-                                 decimal.mark = ifelse(exists("dec"), dec, "."), 
+                                 decimal.mark = dec, 
                                  scientific = FALSE)
     }
   }
