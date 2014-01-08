@@ -20,7 +20,7 @@ ft.write <- function(data, file = "", dec= ".", ...){
   export.data <- data$data
   
   for (i in 1:ncol(export.data)){
-    if(class(export.data[, i]) != "character"){
+    if(class(export.data[, i]) != "character" & typeof(export.data[, i]) != "character"){
       export.data[, i] <- format(export.data[, i], 
                                  decimal.mark = dec, 
                                  scientific = FALSE)
