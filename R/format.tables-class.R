@@ -180,7 +180,7 @@ format.tables <- setRefClass(
       if(has.column.names){
         .column.names <- as.character(raw[1, ])
         .column.names[is.na(.column.names)] <- ""
-        .names.style <- styles[1]
+        .names.style <- .styles[1]
         .styles <- .styles[-1]
         .names.note <- .notes[1]
         if(!is.null(.names.note)) .names.note[is.na(.names.note)] <- ""
@@ -350,7 +350,6 @@ format.tables <- setRefClass(
         })
         return(row)
       }
-      
       
       # column names
       tableRows.names <- list(list(tableRow = paste(apply_template_row(template = get_row_template(.self$names.style), 
