@@ -272,8 +272,12 @@ format.tables <- setRefClass(
       # read table template
       table.template.whisker <- paste(readLines(table.template, warn = FALSE), collapse = "\n")
       
+      # read row template
+      rows.template <- paste0(readLines(row.template), collapse="\n")
+      rows.template <- yaml.load(gsub("\\\\", "\\\\\\\\", rows.template))
       
-      # getting delimiter for whisker: used for fallback template if no row template is provided
+      ##########
+      # get delimiter for whisker: used for row template
       
       #' Split a character in three parts
       #'
@@ -302,24 +306,30 @@ format.tables <- setRefClass(
       whisker.delimiter <- unlist(strsplit(sub(delimtag, "\\1", rx[2]), " "))
       if (is.na(whisker.delimiter) || length(whisker.delimiter) == 0) whisker.delimiter <- c("{{", "}}")
       
+      # if the row template contains the element "whiskerSetDelimiter" use it as whisker delimiter
+      if(!is.null(rows.template[["whiskerSetDelimiter"]])){
+        whisker.delimiter <- unlist(strsplit(sub(delimtag, "\\1", rows.template[["whiskerSetDelimiter"]]), " "))
+      }
+      
       whisker.delimiter.change <- ""
       if (whisker.delimiter[1] != "{{" | whisker.delimiter[2] != "}}") 
         whisker.delimiter.change <- paste0("{{=", whisker.delimiter[1], " ", whisker.delimiter[2], "=}}")
       
       
-      # read row template
-      rows.template <- yaml.load_file(row.template)
-      
+      ##########
       # get template for a specific row
       get_row_template <- function(style.name){
         tmp <- rows.template[[style.name]]
-        if (length(tmp) > 0){
+        if (!is.null(tmp)){
           return(tmp)
+        }else if(!is.null(rows.template[["default"]])){
+          return(rows.template[["default"]])
         }else{
           return(paste0(whisker.delimiter[1], "&value", whisker.delimiter[2]))
         }
       }
       
+      ##########
       # should the data being rounded? 
       digits <- NULL
       nsmall <- 0L
@@ -327,6 +337,7 @@ format.tables <- setRefClass(
         digits <- nsmall <- as.numeric(.self$header$roundDigits)
       }
       
+      ##########
       # apply (whisker) template on all cells of one row
       apply_template_row <- function(template, data, note, ...){
         formated <- c()
@@ -352,6 +363,7 @@ format.tables <- setRefClass(
         return(row)
       }
       
+      ##########
       # column names
       tableRows.names <- list(list(tableRow = paste(apply_template_row(template = get_row_template(.self$names.style), 
                                                                        data = .self$column.names, 
@@ -365,6 +377,7 @@ format.tables <- setRefClass(
         tableRows.names[[1]][["id"]] <- table.id
       }
       
+      ##########
       # data rows
       tableRows.data <- as.list(sapply(1:nrow(.self$data), function(i, ...){
         row.list <- list(tableRow = paste(apply_template_row(template = get_row_template(.self$styles[i]), 
@@ -385,6 +398,7 @@ format.tables <- setRefClass(
         tableRows = list(tableRows =  tableRows.data)
       }
       
+      ##########
       # notes
       rowNotes <- NULL
       if (!is.null(.self$notes)){
@@ -397,7 +411,7 @@ format.tables <- setRefClass(
         }
       }
       
-      
+      ##########
       # putting together data for whisker
       header.whisker <- c(.self$header, list(ncol = ncol(.self$data), id = table.id))
 
