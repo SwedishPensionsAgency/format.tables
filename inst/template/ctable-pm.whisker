@@ -45,9 +45,7 @@
 @{}<%&colTypesOverride%><%^colTypesOverride%><%#firstColWidth%>b{\firstcolwidth} <%/firstColWidth%><%^firstColWidth%>X<%/firstColWidth%>*{\value{colcount} }{ <%&colType%> }<%/colTypesOverride%>@{}%
 }%
 {% table notes: zero or more \tnote commands
-<%#tableNote%>
-\tablenote{\relax{}<%&tableNote%> }
-<%/tableNote%>
+<%#tableNote%>\tablenote{\relax{}<%&tableNote%> }<%/tableNote%>%
 <%#rowNotes%>
 \tnote[<%&number%>]{\relax{}<%&note%> }%
 <%/rowNotes%>%
