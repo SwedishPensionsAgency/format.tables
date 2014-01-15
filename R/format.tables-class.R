@@ -15,6 +15,7 @@
 #' 
 #' @import whisker
 #' @import methods
+#' @import yaml
 #' @aliases format.tables
 #' 
 #' @export
@@ -248,13 +249,13 @@ format.tables <- setRefClass(
         if (is.null(table.template))
           table.template <- system.file("template", "ctable.whisker", package = getPackageName())
         if (is.null(row.template))
-          row.template <- system.file("template", "tex.rows.csv", package = getPackageName())
+          row.template <- system.file("template", "tex.rows.yaml", package = getPackageName())
         collapse.tmp <- " & "
       }else if (type == "html"){
         if (is.null(table.template))
           table.template <- system.file("template", "html.whisker", package = getPackageName())
         if (is.null(row.template))
-          row.template <- system.file("template", "html.rows.csv", package = getPackageName())
+          row.template <- system.file("template", "html.rows.yaml", package = getPackageName())
         collapse.tmp <- ""
       }else if (type == ""){
         if(is.null(table.template) | is.null(row.template)){
@@ -307,13 +308,13 @@ format.tables <- setRefClass(
       
       
       # read row template
-      rows.template <- read.table(row.template, sep = sep, colClasses = "character", header = TRUE, comment.char = "", quote = "")
+      rows.template <- yaml.load_file(row.template)
       
       # get template for a specific row
       get_row_template <- function(style.name){
-        tmp <- rows.template[rows.template[, 1] == style.name, 2:ncol(rows.template)]
-        if (nrow(tmp) > 0){
-          return(as.character(tmp[1, ]))
+        tmp <- rows.template[[style.name]]
+        if (length(tmp) > 0){
+          return(tmp)
         }else{
           return(paste0(whisker.delimiter[1], "&value", whisker.delimiter[2]))
         }
