@@ -10,4 +10,5 @@ License: AGPL-3
 Depends:
     whisker (>= 0.3-2),
     methods,
-    data.table (>= 1.8.10)
+    data.table (>= 1.8.10), 
+    yaml (>= 2.1.7)
