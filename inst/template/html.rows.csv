@@ -1,3 +1,0 @@
-style,1,rest
-header,<th class="bold">{{value}}{{#noteNumber}}<a href=""#{{id}}_{{noteNumber}}"" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</th>,<th class="bold">{{value}}</th>
-plain,<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>,<td>{{formated}}</td>
