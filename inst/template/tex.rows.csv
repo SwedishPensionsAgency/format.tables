@@ -1,3 +1,0 @@
-style,1,rest
-header,{\bfseries <%&value%> }<%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>,{\bfseries <%&value%> }
-plain,<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>,<%&formated%>
