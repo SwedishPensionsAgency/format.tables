@@ -232,7 +232,6 @@ format.tables <- setRefClass(
                       row.template = NULL, 
                       type = "tex",
                       collapse = NULL,
-                      sep = ",", 
                       ...){
 
       # table id: can be used per row or in table template
@@ -342,16 +341,16 @@ format.tables <- setRefClass(
       apply_template_row <- function(template, data, note, ...){
         formated <- c()
         for (i in 1:length(data)){
-          if ((is.data.frame(data) && class(data[1, i]) != "character") | class(data[i]) != "character"){
-            formated[i] <- format(data[i], digits = digits, nsmall = nsmall, ...)
+          if (class(data[[i]]) != "character"){
+            formated[i] <- format(data[[i]], digits = digits, nsmall = nsmall, ...)
           }else{
-            formated[i] <- data[i]
+            formated[i] <- data[[i]]
           }
         }
         formated <- unlist(formated)
         formated[formated == "NA"] <- ""
         row <- sapply(1:length(data), function(i){
-          whisker.data <- list(ncol = length(data), value = data[i], formated = formated[i], colNumber = i, id = table.id)
+          whisker.data <- list(ncol = length(data), value = data[[i]], formated = formated[i], colNumber = i, id = table.id)
           if (!is.null(note) && note != ""){
             whisker.data <- c(whisker.data, list(noteNumber = names(note)))
           }
@@ -366,7 +365,7 @@ format.tables <- setRefClass(
       ##########
       # column names
       tableRows.names <- list(list(tableRow = paste(apply_template_row(template = get_row_template(.self$names.style), 
-                                                                       data = .self$column.names, 
+                                                                       data = as.list(.self$column.names), 
                                                                        note = .self$names.note, 
                                                                        ...), 
                                                     collapse = collapse)
@@ -381,7 +380,7 @@ format.tables <- setRefClass(
       # data rows
       tableRows.data <- as.list(sapply(1:nrow(.self$data), function(i, ...){
         row.list <- list(tableRow = paste(apply_template_row(template = get_row_template(.self$styles[i]), 
-                                                             data = .self$data[i, ], 
+                                                             data = as.list(.self$data[i, ]), 
                                                              note = .self$notes[i], ...)
                                           , collapse = collapse)
         )
