@@ -1,9 +1,9 @@
 {{=<% %>=}}
 
 \begin{identity}%
-<%#firstColWidth%>\setlength\firstcolwidth{ <%&firstColWidth%> } <%/firstColWidth%>% 
-<%^firstColWidth%>\toggletrue{firstcolNoIntend} <%/firstColWidth%>% 
-\setcounter{colcount}{ <%&ncol%>-1}%
+<%#firstColWidth%>\setlength\firstcolwidth{ <%&firstColWidth%> } %
+<%/firstColWidth%><%^firstColWidth%>\toggletrue{firstcolNoIntend} %
+<%/firstColWidth%>\setcounter{colcount}{ <%&ncol%>-1}%
 \ctable[ %options
 <%#bgopacity%>bgopacity=<%&bgopacity%>, %
 <%/bgopacity%><%#botcap%>botcap, %
@@ -40,21 +40,14 @@
 <%/super%><%#table%>table, %
 <%/table%><%#topcap%>topcap, %
 <%/topcap%>
-]%
-{ % column definitions for \begin{tabular}
-@{}<%&colTypesOverride%><%^colTypesOverride%><%#firstColWidth%>b{\firstcolwidth} <%/firstColWidth%><%^firstColWidth%>X<%/firstColWidth%>*{\value{colcount} }{ <%&colType%> }<%/colTypesOverride%>@{}%
-}%
-{% table notes: zero or more \tnote commands
-<%#tableNote%>\tablenote{\relax{}<%&tableNote%> }<%/tableNote%>%
-<%#rowNotes%>
-\tnote[<%&number%>]{\relax{}<%&note%> }%
-<%/rowNotes%>%
-}%
-{% rows for the table
+]{ % column definitions for \begin{tabular}
+@{}<%&colTypesOverride%><%^colTypesOverride%><%#firstColWidth%>b{\firstcolwidth} <%/firstColWidth%><%^firstColWidth%>X<%/firstColWidth%>*{\value{colcount} }{ <%&colType%><%^colType%><%#width%>R<%/width%><%^width%>r<%/width%><%/colType%> }<%/colTypesOverride%>@{}%
+}{% table notes: zero or more \tnote commands <%#tableNote%>
+\tablenote{\relax{}<%&tableNote%> }%<%/tableNote%><%#rowNotes%>
+\tnote[<%&number%>]{\relax{}<%&note%> }%<%/rowNotes%>% 
+}{% rows for the table
 \toprulepm%
-<%#tableRows%>
-<%&tableRow%>\tabularnewline%
-<%#small-1-last%>\pmAddlinespaceV<%/small-1-last%><%#small-2-last%>\pmAddlinespaceV<%/small-2-last%><%#small-3-last%>\pmAddlinespaceV<%/small-3-last%><%#subtotal-0%>\pmAddlinespace<%/subtotal-0%><%#subtotal-1%>\pmAddlinespace<%/subtotal-1%>%
+<%#tableRows%><%&tableRow%>\tabularnewline <%#small-1-last%>\pmAddlinespaceV<%/small-1-last%><%#small-2-last%>\pmAddlinespaceV<%/small-2-last%><%#small-3-last%>\pmAddlinespaceV<%/small-3-last%><%#subtotal-0%>\pmAddlinespace<%/subtotal-0%><%#subtotal-1%>\pmAddlinespace<%/subtotal-1%>%
 <%/tableRows%> 
 \bottomrulepm%
 }%

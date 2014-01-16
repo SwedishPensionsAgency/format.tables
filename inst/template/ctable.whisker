@@ -4,17 +4,17 @@
 \ctable[ %options
 <%#bgopacity%>bgopacity=<%&bgopacity%>, %
 <%/bgopacity%><%#botcap%>botcap, %
-<%/botcap%><%#caption%>caption={\relax{}<%&caption%><%#tableNote%>*<%/tableNote%><%#subcaption%>\newline{}{\mdseries\color{black}<%&subcaption%> } <%/subcaption%> }, %
+<%/botcap%><%#caption%>caption={\relax{}<%&caption%><%#tableNote%>*<%/tableNote%><%#subcaption%>\newline{}{\mdseries\color{black}<%&subcaption%>\relax}<%/subcaption%>\relax}, %
 <%/caption%><%#cap%>cap={\relax{}<%&cap%> }, %
 <%/cap%><%#captionskip%>captionskip=<%&captionskip%>, %
-<%/captionskip%><%#continued%>continued={\relax{}<%&continued%> }, %
+<%/captionskip%><%#continued%>continued={\relax{}<%&continued%>\relax}, %
 <%/continued%><%#doinside%>doinside=<%&doinside%>, %
 <%/doinside%><%#footerwidth%>footerwidth=<%&footerwidth%>, %
 <%/footerwidth%><%#framefg%>framefg=<%&framefg%>, %
 <%/framefg%><%#framebg%>framebg=<%&framebg%>, %
 <%/framebg%><%#framerule%>framerule=<%&framerule%>, %
 <%/framerule%><%#framesep%>framesep=<%&framesep%>, %
-<%/framesep%><%#label%>label={\relax{}<%&label%> }, %
+<%/framesep%><%#label%>label={\relax{}<%&label%>\relax}, %
 <%/label%><%#maxwidth%>maxwidth=<%&maxwidth%>, %
 <%/maxwidth%><%#mincapwidth%>mincapwidth=<%&mincapwidth%>, %
 <%/mincapwidth%><%#pos%>pos=<%&pos%>, %
@@ -39,15 +39,11 @@
 <%/topcap%>
 ]%
 { % column definitions for \begin{tabular}
-@{}<%&colTypesOverride%><%^colTypesOverride%><%#firstColWidth%>b{\firstcolwidth} <%/firstColWidth%>*{ <%&ncol%> }{ l }<%/colTypesOverride%>@{}%
-}%
-{% table notes: zero or more \tnote commands
-<%#tableNote%>\tablenote{\relax{}<%&tableNote%> }%<%/tableNote%>
-<%#rowNotes%>
-\tnote[<%&number%>]{\relax{}<%&note%> }%
-<%/rowNotes%>%
-}%
-{% rows for the table
+@{}<%&colTypesOverride%><%^colTypesOverride%>*{ <%&ncol%> }{ l }<%/colTypesOverride%>@{}%
+}{% table notes: zero or more \tnote commands <%#tableNote%>
+\tablenote{\relax{}<%&tableNote%>\relax}%<%/tableNote%><%#rowNotes%>
+\tnote[<%&number%>]{\relax{}<%&note%>\relax}%<%/rowNotes%>% 
+}{% rows for the table
 \toprule%
 <%#tableRows%>
 <%&tableRow%>\tabularnewline%

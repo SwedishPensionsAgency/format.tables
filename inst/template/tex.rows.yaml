@@ -2,8 +2,8 @@ whiskerSetDelimiter:
 - "{{=<% %>=}}"
 
 header:
-- "{\bfseries <%&value%> }<%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>"
-- "{\bfseries <%&value%> \k}"
+- "{\bfseries{}<%&value%>\relax}<%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>"
+- "{\bfseries{}<%&value%>\relax}"
 
 plain:
 - "<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>"
