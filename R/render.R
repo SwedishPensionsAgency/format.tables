@@ -44,7 +44,6 @@
 #' @param row.template path to the template for rows containing whisker tags
 #' @param type "latex" or "html" supported, in "latex" cells are collapsed with " & ", in "html" with ""
 #' @param collapse string for collapsing cells, overrides the standards used in the type parameter
-#' @param sep the field separator character, for more information see \code{\link{read.table}} 
 #' @param ... passed to \code{\link{format}}, e.g. decimal.mark, big.mark
 #' 
 #' @name render

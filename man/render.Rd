@@ -14,9 +14,6 @@
   \item{collapse}{string for collapsing cells, overrides
   the standards used in the type parameter}
 
-  \item{sep}{the field separator character, for more
-  information see \code{\link{read.table}}}
-
   \item{...}{passed to \code{\link{format}}, e.g.
   decimal.mark, big.mark}
 }
