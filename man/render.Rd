@@ -14,6 +14,9 @@
   \item{collapse}{string for collapsing cells, overrides
   the standards used in the type parameter}
 
+  \item{scientific}{passed to \code{\link{format}}, default
+  FALSE}
+
   \item{...}{passed to \code{\link{format}}, e.g.
   decimal.mark, big.mark}
 }

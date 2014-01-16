@@ -232,6 +232,7 @@ format.tables <- setRefClass(
                       row.template = NULL, 
                       type = "tex",
                       collapse = NULL,
+                      scientific = FALSE, 
                       ...){
 
       # table id: can be used per row or in table template
@@ -332,7 +333,7 @@ format.tables <- setRefClass(
       # should the data being rounded? 
       digits <- NULL
       nsmall <- 0L
-      if(!is.null(.self$header$roundDigits)){
+      if(!is.null(.self$header$roundDigits) && as.numeric(.self$header$roundDigits) > 0){
         digits <- nsmall <- as.numeric(.self$header$roundDigits)
       }
       
@@ -342,7 +343,7 @@ format.tables <- setRefClass(
         formated <- c()
         for (i in 1:length(data)){
           if (class(data[[i]]) != "character"){
-            formated[i] <- format(data[[i]], digits = digits, nsmall = nsmall, ...)
+            formated[i] <- format(data[[i]], scientific = scientific, digits = digits, nsmall = nsmall, ...)
           }else{
             formated[i] <- data[[i]]
           }
