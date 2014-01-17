@@ -193,12 +193,13 @@ format.tables <- setRefClass(
       .data <- raw
       if (convert.data){
         for (i in 1:ncol(.data)){
-          col <- type.convert(as.character(.data[, i]), dec = dec)
-          if (class(col) != "factor"){
-            .data[, i] <- col
-          }else{
-            .data[, i] <- as.character(.data[, i])
-          }
+          #col <- type.convert(as.character(.data[, i]), dec = dec, as.is = TRUE)
+          .data[[i]] <- type.convert(.data[[i]], dec = dec, as.is = TRUE)
+#           if (class(col) != "factor"){
+#             .data[, i] <- col
+#           }else{
+#             .data[, i] <- as.character(.data[, i])
+#           }
         }
       }
       
@@ -233,6 +234,7 @@ format.tables <- setRefClass(
                       type = "tex",
                       collapse = NULL,
                       scientific = FALSE, 
+                      format = "f",
                       ...){
 
       # table id: can be used per row or in table template
@@ -328,14 +330,15 @@ format.tables <- setRefClass(
           return(paste0(whisker.delimiter[1], "&value", whisker.delimiter[2]))
         }
       }
-      
+      browser()
       ##########
       # should the data being rounded? 
       digits <- NULL
-      nsmall <- 0L
-      if(!is.null(.self$header$roundDigits) && as.numeric(.self$header$roundDigits) > 0){
-        digits <- nsmall <- as.numeric(.self$header$roundDigits)
+      if(!is.null(.self$header$digits)){
+        digits <- rep_len(as.numeric(strsplit(.self$header$digits, "\\|")[[1]]), ncol(.self$data))
       }
+      
+      format <- rep_len(format, ncol(.self$data))
       
       ##########
       # apply (whisker) template on all cells of one row
@@ -343,7 +346,7 @@ format.tables <- setRefClass(
         formated <- c()
         for (i in 1:length(data)){
           if (class(data[[i]]) != "character"){
-            formated[i] <- format(data[[i]], scientific = scientific, digits = digits, nsmall = nsmall, ...)
+            formated[i] <- formatC(data[[i]], format = format[i], digits = digits[i], ...)
           }else{
             formated[i] <- data[[i]]
           }
