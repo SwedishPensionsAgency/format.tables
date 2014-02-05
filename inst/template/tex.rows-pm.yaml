@@ -7,44 +7,44 @@ header-intable:
 - "\pmBoldSpaceLabel{0em}{\relax{}<%&value%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
 - "\pmBold{\relax{}<%&value%>\relax}"
 sum:
-- "\pmSum{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmBold{\relax{}<%&formated%>\relax}"
+- "\pmSum{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmBold{\relax{}<%&formatted%>\relax}"
 subtotal-0:
-- "\pmSubtotal{0em}{ <%&ncol%> }{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmBold{\relax{}<%&formated%>\relax}"
+- "\pmSubtotal{0em}{ <%&ncol%> }{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmBold{\relax{}<%&formatted%>\relax}"
 subtotal-1:
-- "\pmSubtotal{1em}{ <%&ncol%> }{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmBold{\relax{}<%&formated%>\relax}"
+- "\pmSubtotal{1em}{ <%&ncol%> }{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmBold{\relax{}<%&formatted%>\relax}"
 subtotal-0-last:
-- "\pmSubtotalLast{0em}{ <%&ncol%> }{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmBold{\relax{}<%&formated%>\relax}"
+- "\pmSubtotalLast{0em}{ <%&ncol%> }{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmBold{\relax{}<%&formatted%>\relax}"
 subtotal-1-last:
-- "\pmSubtotalLast{1em}{ <%&ncol%> }{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmBold{ <%&formated%>\relax}"
+- "\pmSubtotalLast{1em}{ <%&ncol%> }{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmBold{ <%&formatted%>\relax}"
 bold-0:
-- "\pmBoldLabel{0em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmBold{ <%&formated%>\relax}"
+- "\pmBoldLabel{0em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmBold{ <%&formatted%>\relax}"
 plain-0:
-- "\pmPlainLabel{0em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmPlain{ <%&formated%>\relax}"
+- "\pmPlainLabel{0em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmPlain{ <%&formatted%>\relax}"
 plain-1:
-- "\pmPlainLabel{1em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmPlain{\relax{}<%&formated%>\relax}"
+- "\pmPlainLabel{1em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmPlain{\relax{}<%&formatted%>\relax}"
 small-1:
-- "\pmSmallLabel{1em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmSmall{\relax{}<%&formated%>\relax}"
+- "\pmSmallLabel{1em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmSmall{\relax{}<%&formatted%>\relax}"
 small-2:
-- "\pmSmallLabel{2em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmSmall{\relax{}<%&formated%>\relax}"
+- "\pmSmallLabel{2em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmSmall{\relax{}<%&formatted%>\relax}"
 small-3:
-- "\pmSmallLabel{3em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmSmall{\relax{}<%&formated%>\relax}"
+- "\pmSmallLabel{3em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmSmall{\relax{}<%&formatted%>\relax}"
 small-1-last:
-- "\pmSmallLabelLast{1em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmSmall{\relax{}<%&formated%>\relax}"
+- "\pmSmallLabelLast{1em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmSmall{\relax{}<%&formatted%>\relax}"
 small-2-last:
-- "\pmSmallLabelLast{2em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmSmall{\relax{}<%&formated%>\relax}"
+- "\pmSmallLabelLast{2em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmSmall{\relax{}<%&formatted%>\relax}"
 small-3-last: 
-- "\pmSmallLabelLast{3em}{\relax{}<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
-- "\pmSmall{\relax{}<%&formated%>\relax}"
+- "\pmSmallLabelLast{3em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmSmall{\relax{}<%&formatted%>\relax}"

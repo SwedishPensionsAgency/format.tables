@@ -3,9 +3,9 @@ header:
 - '<th class="bold">{{value}}</th>'
 
 plain:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 
 default:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'

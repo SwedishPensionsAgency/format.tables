@@ -5,44 +5,44 @@ header-intable:
 - '<td>{{value}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>' 
 - '<td>{{value}}</td>'
 sum:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 subtotal-0: 
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 subtotal-1:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 subtotal-0-last: 
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 subtotal-1-last:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 bold-0:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 plain-0:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 plain-1:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 small-1:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 small-2:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 small-3:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 small-1-last:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 small-2-last:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'
 small-3-last:
-- '<td>{{formated}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
-- '<td>{{formated}}</td>'
+- '<td>{{formatted}}{{#noteNumber}}<a href="#{{id}}_{{noteNumber}}" class="table_reference">{{noteNumber}}</a>{{/noteNumber}}</td>'
+- '<td>{{formatted}}</td>'

@@ -6,9 +6,9 @@ header:
 - "{\bfseries{}<%&value%>\relax}"
 
 plain:
-- "<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>"
-- "<%&formated%>"
+- "<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>"
+- "<%&formatted%>"
 
 default:
-- "<%&formated%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>"
-- "<%&formated%>"
+- "<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>"
+- "<%&formatted%>"
