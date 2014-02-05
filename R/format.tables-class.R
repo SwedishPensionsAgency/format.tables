@@ -233,8 +233,10 @@ format.tables <- setRefClass(
                       row.template = NULL, 
                       type = "tex",
                       collapse = NULL,
-                      scientific = FALSE, 
                       format = "f",
+                      digits = NULL,
+                      NA.string.formatted = "",
+                      NA.string.value = "", 
                       ...){
 
       # table id: can be used per row or in table template
@@ -330,10 +332,9 @@ format.tables <- setRefClass(
           return(paste0(whisker.delimiter[1], "&value", whisker.delimiter[2]))
         }
       }
-      browser()
+      
       ##########
-      # should the data being rounded? 
-      digits <- NULL
+      # should the rounding beeing overwritten? 
       if(!is.null(.self$header$digits)){
         digits <- rep_len(as.numeric(strsplit(.self$header$digits, "\\|")[[1]]), ncol(.self$data))
       }
@@ -343,18 +344,20 @@ format.tables <- setRefClass(
       ##########
       # apply (whisker) template on all cells of one row
       apply_template_row <- function(template, data, note, ...){
-        formated <- c()
+        formatted <- c()
         for (i in 1:length(data)){
           if (class(data[[i]]) != "character"){
-            formated[i] <- formatC(data[[i]], format = format[i], digits = digits[i], ...)
+            formatted[i] <- formatC(data[[i]], format = format[i], digits = digits[i], ...)
           }else{
-            formated[i] <- data[[i]]
+            formatted[i] <- data[[i]]
           }
         }
-        formated <- unlist(formated)
-        formated[formated == "NA"] <- ""
+        formatted <- unlist(formatted)
+        if (any(is.na(unlist(data)))){
+          formatted[is.na(unlist(data))] <- NA.string.formatted
+        }
         row <- sapply(1:length(data), function(i){
-          whisker.data <- list(ncol = length(data), value = data[[i]], formated = formated[i], colNumber = i, id = table.id)
+          whisker.data <- list(ncol = length(data), value = ifelse(is.na(data[[i]]), NA.string.value, data[[i]]), formatted = formatted[i], colNumber = i, id = table.id)
           if (!is.null(note) && note != ""){
             whisker.data <- c(whisker.data, list(noteNumber = names(note)))
           }
