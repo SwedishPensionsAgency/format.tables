@@ -120,9 +120,57 @@ format.tables <- setRefClass(
     print = function(type, template = ""){
       base::print(type)
     }, 
-    write = function(file = "", ...){
+    write = function(file = "", dec = ".", ...){
       sanitize()
-      ft.write(.self, file = file, ...)
+      
+      export.data <- .self$data
+      
+      for (i in 1:ncol(export.data)){
+        if(class(export.data[, i]) != "character" & typeof(export.data[, i]) != "character"){
+          export.data[, i] <- format(export.data[, i], 
+                                     decimal.mark = dec, 
+                                     scientific = FALSE)
+        }
+      }
+      
+      #putting together styles, data, and notes
+      .styles <- .self$styles
+      .notes <- .self$notes
+      if(!is.null(.self$names.style)){
+        .styles <- c(.self$names.style, .styles)
+        if(!is.null(.notes)) .notes <- c(ifelse(is.null(.self$names.note), NA, .self$names.note), .notes)
+        export.data <- rbind(.self$column.names, export.data)
+      } 
+      .styles <- c("styles", .styles)
+      
+      export.data <- rbind(rep(NA, ncol(export.data)), export.data)
+      
+      export.data <- cbind(.styles, export.data, stringsAsFactors = FALSE)
+      
+      if(!is.null(.notes)) export.data <- cbind(export.data, c("notes", .notes), stringsAsFactors = FALSE)
+      
+
+      .header <- data.frame(keys = names(.self$header), values = unlist(.self$header))
+
+      # adding columns to fit the width of the data
+      export.header <- cbind(.header, 
+                             matrix(rep(NA, (ncol(export.data)-ncol(.header))*nrow(.header)), 
+                                    ncol =  ncol(export.data)-ncol(.header) 
+                             ) 
+      )
+      names(export.data) <- names(export.header)
+      
+      export.data <- rbind(export.header, rep(NA, ncol(export.header)), export.data)
+      
+      names(export.data) <- paste0("V", 1:ncol(export.data))
+      row.names(export.data) <- 1:nrow(export.data)
+      
+      if (file == ""){
+        print(export.data)
+      }else{
+        write.table(x = export.data, file = file, row.names = FALSE, ...)
+      }
+      
     }, 
     
     #' see read.R for documentation

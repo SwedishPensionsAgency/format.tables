@@ -1,14 +1,7 @@
-\name{ft.write}
-\alias{ft.write}
+\name{write}
+\alias{write}
 \title{Write data in format.tables format}
-\usage{
-ft.write(data, file = "", dec = ".", ...)
-}
 \arguments{
-  \item{data}{data in ft.data format, containing tabular
-  data in a data frame, column names, styles, notes, and
-  header}
-
   \item{file}{either a character string naming a file or a
   \code{\link{connection}} open for writing. "" indicates
   output to the console}
@@ -17,7 +10,8 @@ ft.write(data, file = "", dec = ".", ...)
   numeric or complex columns: must be a single character.}
 
   \item{...}{parameters passed to
-  \code{\link{write.table}}}
+  \code{\link{write.table}}, \code{row.names} is not
+  available as it is set to false by default.}
 }
 \description{
 Write data in format.table format which is a special
