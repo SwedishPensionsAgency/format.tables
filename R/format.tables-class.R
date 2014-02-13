@@ -120,16 +120,14 @@ format.tables <- setRefClass(
     print = function(type, template = ""){
       base::print(type)
     }, 
-    write = function(file = "", dec = ".", ...){
+    write = function(file = "", dec = ft.opts.get("dec", "write", "."), ...){
       sanitize()
       
       export.data <- .self$data
-      
+      browser()
       for (i in 1:ncol(export.data)){
         if(class(export.data[, i]) != "character" & typeof(export.data[, i]) != "character"){
-          export.data[, i] <- format(export.data[, i], 
-                                     decimal.mark = dec, 
-                                     scientific = FALSE)
+          export.data[, i] <- gsub("\\.", dec, export.data[, i]) 
         }
       }
       
@@ -147,17 +145,21 @@ format.tables <- setRefClass(
       
       export.data <- cbind(.styles, export.data, stringsAsFactors = FALSE)
       
-      if(!is.null(.notes)) export.data <- cbind(export.data, c("notes", .notes), stringsAsFactors = FALSE)
+      if(!is.null(.notes)) 
+        export.data <- cbind(export.data, c("notes", .notes), stringsAsFactors = FALSE)
       
 
-      .header <- data.frame(keys = names(.self$header), values = unlist(.self$header))
+      .header <- data.frame(keys = names(.self$header), 
+                            values = unlist(.self$header), 
+                            stringsAsFactors = FALSE)
 
       # adding columns to fit the width of the data
       export.header <- cbind(.header, 
                              matrix(rep(NA, (ncol(export.data)-ncol(.header))*nrow(.header)), 
                                     ncol =  ncol(export.data)-ncol(.header) 
-                             ) 
-      )
+                             ), 
+                             stringsAsFactors = FALSE
+                             )
       names(export.data) <- names(export.header)
       
       export.data <- rbind(export.header, rep(NA, ncol(export.header)), export.data)
@@ -168,6 +170,19 @@ format.tables <- setRefClass(
       if (file == ""){
         print(export.data)
       }else{
+        ft.opts.write <- ft.opts.get("write", domain = NULL, default = NULL)
+        if (is.null(ft.opts.write))
+          ft.opts.write <- list()
+        
+        do.call.merge.args(FUN=write.table, 
+                           ft.opts.write, 
+                           list(x = export.data, 
+                                file = file, 
+                                na = "", 
+                                row.names = FALSE, 
+                                col.names = FALSE), 
+                           list(...))
+        
         write.table(x = export.data, file = file, na = "", row.names = FALSE, col.names = FALSE, ...)
       }
       
@@ -197,9 +212,10 @@ format.tables <- setRefClass(
       raw <- do.call.merge.args(FUN=read.table, 
                                 ft.opts.read, 
                                 list(file = file, 
-                                       na.strings = na.strings, 
-                                       stringsAsFactors = FALSE, 
-                                       colClasses = "character"), 
+                                     na.strings = na.strings, 
+                                     stringsAsFactors = FALSE, 
+                                     colClasses = "character", 
+                                     header = FALSE), 
                                 list(...))
       
       #there has to be a line with only NAs between the header and the data
