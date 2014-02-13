@@ -36,16 +36,16 @@ ft.opts.set <- function(read = NULL, write = NULL, render = NULL){
 #' @export
 ft.opts.get <- function(option, domain = c("read", "write", "render"), default = NULL){
   domain <- match.arg(domain)
-  if(!is.null(domain) & !is.na(domain)){
+  if (!is.null(domain) & !is.na(domain)) {
     opt <- options("format.tables")[["format.tables"]][[domain]][[option]]
-  }else{
+  } else {
     opt <- options("format.tables")[["format.tables"]][[option]]
   }
   
-  if (is.null(opt)){
+  if (is.null(opt)) {
     path <- unlist(strsplit(option, "\\$"))
     opt <- options("format.tables")[["format.tables"]]
-    for (i in 1:length(path)){
+    for (i in 1:length(path)) {
       opt <- opt[[ path[[i]] ]]
     }
   }

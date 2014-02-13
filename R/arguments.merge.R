@@ -11,13 +11,14 @@
 # check if there is an "..." in default.arguments
 # if true, merge args with options
 # if false, merge args with options except elements that are not in args
-arguments.merge <- function(x, 
-                            y, 
-                            FUN = NULL, 
-                            append = ifelse(is.null(FUN), 
-                                            TRUE, 
-                                            "..." %in% names(formals(FUN)))) {
-  if (!append){
+arguments.merge <- function(
+  x, 
+  y, 
+  FUN = NULL, 
+  append = ifelse(is.null(FUN), 
+                  TRUE, 
+                  "..." %in% names(formals(FUN)))) {
+  if (!append) {
     y[!names(y) %in% names(x)] <- NULL
   }
   x[names(y)] = y

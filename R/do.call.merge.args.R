@@ -17,14 +17,14 @@ do.call.merge.args <- function(FUN, ...){
   default.args <- formals(FUN)
   args <- default.args[!names(default.args) %in% c("", "...")]
   
-  if(is.null(args))
+  if (is.null(args))
     args <- list()
   
   # 2. arguments passed to ... in order of appereance
   argument.list <- list(...)
   
-  for (i in 1:length(argument.list)){
-    if(!"list" %in% class(argument.list[[i]])){
+  for (i in 1:length(argument.list)) {
+    if (!"list" %in% class(argument.list[[i]])) {
       argument.list[[i]] <- as.list(argument.list[[i]])
     }
     args <- arguments.merge(args, argument.list[[i]], FUN = FUN, append = ifelse(is.primitive(FUN), 
