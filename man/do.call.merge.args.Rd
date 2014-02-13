@@ -1,0 +1,28 @@
+\name{do.call.merge.args}
+\alias{do.call.merge.args}
+\title{Execute a Function Call with Merged Arguments}
+\usage{
+do.call.merge.args(FUN, ...)
+}
+\arguments{
+  \item{FUN}{function to call}
+
+  \item{...}{named vectors or lists with arguments that
+  should be merged together and used in
+  \code{\link{do.call}}, the last item of \code{...} has
+  the highest priority. The \code{names} attribute of
+  \code{...} gives the argument names.}
+}
+\description{
+Constructs and executes a function call from a name or a
+function and a one or more lists/vectors of arguments that
+are merged prior to be passed to the funtion.
+}
+\examples{
+\dontrun{
+data <- data.frame(a = c(1:10)/2, b = LETTERS[1:10])
+do.call.merge.args(FUN = write.table, list(x = data, sep = ";", dec = ".", row.names = FALSE), c(dec = ","))
+
+do.call.merge.args(FUN = sqrt, c(x=2), list(x=3)) }
+}
+

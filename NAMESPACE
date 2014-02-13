@@ -1,3 +1,7 @@
 exportClasses(format.tables)
 export(format.tables)
 export(latex_escape)
+export(do.call.merge.args)
+export(arguments.merge)
+export(ft.opts.get)
+export(ft.opts.set)

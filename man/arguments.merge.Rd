@@ -1,0 +1,23 @@
+\name{arguments.merge}
+\alias{arguments.merge}
+\title{Merge two lists of function arguments}
+\usage{
+arguments.merge(x, y, FUN = NULL, append = ifelse(is.null(FUN), TRUE, "..."
+  \%in\% names(formals(FUN))))
+}
+\arguments{
+  \item{x}{base list}
+
+  \item{y}{list to be merged with \code{x}}
+
+  \item{FUN}{function that should take the arguments. If
+  the \code{\link{formals}} of \code{FUN} does not contain
+  \code{...} the default of append is changed.}
+
+  \item{append}{should elements of \code{y} not contained
+  in \code{x} be appended?}
+}
+\description{
+Merge two lists of function arguments
+}
+
