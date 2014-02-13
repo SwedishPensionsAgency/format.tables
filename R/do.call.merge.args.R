@@ -33,5 +33,6 @@ do.call.merge.args <- function(FUN, ...){
   }
   
   # call the function with the merged arguments and return the result
-  return(do.call(FUN, args))
+  # args can contain names of arguments in args as values that should be evaluated; hence envir = list2env(args) is needed
+  return(do.call(FUN, args, envir = list2env(args)))
 }
