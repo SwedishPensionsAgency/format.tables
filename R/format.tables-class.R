@@ -175,10 +175,10 @@ format.tables <- setRefClass(
     
     #' see read.R for documentation
     read = function(file, 
-                    has.column.names = TRUE, 
-                    convert.data = TRUE, 
-                    dec = ".", 
-                    na.strings = "", 
+                    has.column.names = ft.opts.get("has.column.names", "read", TRUE), 
+                    convert.data = ft.opts.get("convert.data", "read", TRUE), 
+                    dec = ft.opts.get("dec", "read", "."), 
+                    na.strings = ft.opts.get("na.strings", "read", ""), 
                     ...){
       
       #initialize variables 
@@ -188,11 +188,19 @@ format.tables <- setRefClass(
       .names.style <- NULL
       .names.note <- NULL
       
-      raw <- read.table(file, 
-                        na.strings = na.strings, 
-                        stringsAsFactors = FALSE, 
-                        colClasses = "character", 
-                        ...)
+      
+      ft.opts.read <- ft.opts.get("read", domain = NULL, default = NULL)
+      if (is.null(ft.opts.read))
+        ft.opts.read <- list()
+      
+      # read from file
+      raw <- do.call.merge.args(FUN=read.table, 
+                                ft.opts.read, 
+                                list(file = file, 
+                                       na.strings = na.strings, 
+                                       stringsAsFactors = FALSE, 
+                                       colClasses = "character"), 
+                                list(...))
       
       #there has to be a line with only NAs between the header and the data
       if (sum(rowSums(is.na(raw)) == ncol(raw), na.rm = TRUE) > 0){
@@ -241,13 +249,7 @@ format.tables <- setRefClass(
       .data <- raw
       if (convert.data){
         for (i in 1:ncol(.data)){
-          #col <- type.convert(as.character(.data[, i]), dec = dec, as.is = TRUE)
           .data[[i]] <- type.convert(.data[[i]], dec = dec, as.is = TRUE)
-#           if (class(col) != "factor"){
-#             .data[, i] <- col
-#           }else{
-#             .data[, i] <- as.character(.data[, i])
-#           }
         }
       }
       
