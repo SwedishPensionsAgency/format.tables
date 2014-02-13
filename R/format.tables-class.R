@@ -168,7 +168,7 @@ format.tables <- setRefClass(
       if (file == ""){
         print(export.data)
       }else{
-        write.table(x = export.data, file = file, row.names = FALSE, ...)
+        write.table(x = export.data, file = file, na = "", row.names = FALSE, col.names = FALSE, ...)
       }
       
     }, 
