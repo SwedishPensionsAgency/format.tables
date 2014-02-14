@@ -125,11 +125,19 @@ format.tables <- setRefClass(
       
       export.data <- .self$data
       browser()
+      # change decimal mark for converting numeric to character
+      OutDec <- getOption("OutDec")
+      options(OutDec = dec)
+      
+      # convert numeric to character, as.character is used as it is more convenient than format or formatC
       for (i in 1:ncol(export.data)){
         if(class(export.data[, i]) != "character" & typeof(export.data[, i]) != "character"){
-          export.data[, i] <- gsub("\\.", dec, export.data[, i]) 
+          export.data[, i] <- as.character(export.data[, i]) 
         }
       }
+      
+      # restore OutDec option
+      options(OutDec = OutDec)
       
       #putting together styles, data, and notes
       .styles <- .self$styles
