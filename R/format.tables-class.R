@@ -303,16 +303,20 @@ format.tables <- setRefClass(
     }, 
     
     #' see the file render.R for documentation 
-    render = function(table.template = NULL, 
-                      row.template = NULL, 
-                      type = "tex",
-                      collapse = NULL,
-                      format = "f",
-                      digits = NULL,
-                      NA.string.formatted = "",
-                      NA.string.value = "", 
+    render = function(table.template = ft.opts.get("table.template", "render", NULL), 
+                      row.template = ft.opts.get("row.template", "render", NULL), 
+                      type = ft.opts.get("type", "render", "tex"),
+                      collapse = ft.opts.get("collapse", "render", NULL),
+                      format = ft.opts.get("format", "render", "f"),
+                      digits = ft.opts.get("digits", "render", NULL),
+                      NA.string.formatted = ft.opts.get("NA.string.formatted", "render", ""),
+                      NA.string.value = ft.opts.get("NA.string.value", "render", ""), 
                       ...){
 
+      ft.opts.render <- ft.opts.get("render", domain = NULL, default = NULL)
+      if (is.null(ft.opts.render))
+        ft.opts.render <- list()
+      
       # table id: can be used per row or in table template
       table.id <- .self$header$id
       if (is.null(table.id)){
@@ -409,19 +413,25 @@ format.tables <- setRefClass(
       
       ##########
       # should the rounding beeing overwritten? 
-      if(!is.null(.self$header$digits)){
-        digits <- rep_len(as.numeric(strsplit(.self$header$digits, "\\|")[[1]]), ncol(.self$data))
-      }
+      if (!is.null(.self$header$digits))
+        digits <- as.numeric(strsplit(.self$header$digits, "\\|")[[1]])
       
+      # replicate digits and format to match ncol
+      if (!is.null(digits))
+        digits <- rep_len(digits, ncol(.self$data))
       format <- rep_len(format, ncol(.self$data))
       
       ##########
       # apply (whisker) template on all cells of one row
-      apply_template_row <- function(template, data, note, ...){
+      apply_template_row <- function(template, data, note, format = NULL, digits = NULL, ...){
         formatted <- c()
+        
         for (i in 1:length(data)){
           if (class(data[[i]]) != "character"){
-            formatted[i] <- formatC(data[[i]], format = format[i], digits = digits[i], ...)
+            formatted[i] <- do.call.merge.args(FUN = formatC, 
+                               ft.opts.render, 
+                               list(x = data[[i]], format = format[i], digits = digits[i]), 
+                               list(...))
           }else{
             formatted[i] <- data[[i]]
           }
@@ -448,6 +458,8 @@ format.tables <- setRefClass(
       tableRows.names <- list(list(tableRow = paste(apply_template_row(template = get_row_template(.self$names.style), 
                                                                        data = as.list(.self$column.names), 
                                                                        note = .self$names.note, 
+                                                                       format = format, 
+                                                                       digits = digits, 
                                                                        ...), 
                                                     collapse = collapse)
       ))
@@ -462,7 +474,10 @@ format.tables <- setRefClass(
       tableRows.data <- as.list(sapply(1:nrow(.self$data), function(i, ...){
         row.list <- list(tableRow = paste(apply_template_row(template = get_row_template(.self$styles[i]), 
                                                              data = as.list(.self$data[i, ]), 
-                                                             note = .self$notes[i], ...)
+                                                             note = .self$notes[i],
+                                                             format = format, 
+                                                             digits = digits, 
+                                                             ...)
                                           , collapse = collapse)
         )
         row.list[[.self$styles[i]]] <- TRUE
