@@ -204,7 +204,7 @@ format.tables <- setRefClass(
                     na.strings = ft.opts.get("na.strings", "read", "NA"), 
                     ...){
       
-      #initialize variables 
+      # initialize variables 
       .header <- NULL
       .notes <- NULL
       .column.names <- NULL
@@ -228,17 +228,22 @@ format.tables <- setRefClass(
                                      header = FALSE), 
                                 list(...))
       
-      #there has to be a line with only NAs between the header and the data
+      # there has to be a line with only NAs between the header and the data
       if (sum(rowSums(is.na(raw)) == ncol(raw), na.rm = TRUE) > 0) {
         separation.index <- which.max(rowSums(is.na(raw)) == ncol(raw))
         
-        #header: keys -> values 
+        # header: keys -> values 
         header.df <- raw[1:separation.index-1, c(1,2)]
         names(header.df) <- c("keys", "values")
         .header <- as.list(header.df$values)
         names(.header) <- header.df$keys
         
-        #delete the header and keep just the data with styles and notes columns 
+        # type convert header
+        .header <- lapply(.header, function(x){
+          do.call.merge.args(FUN = type.convert, list(x = x, dec = dec, as.is = TRUE))
+        })
+        
+        # delete the header and keep just the data with styles and notes columns 
         raw <- raw[-(1:separation.index), ]
       }
       # styles 
@@ -248,7 +253,7 @@ format.tables <- setRefClass(
       .styles <- raw[2:nrow(raw), 1]
       raw[, 1] <- NULL
       
-      #notes 
+      # notes 
       if (isTRUE(raw[1, ncol(raw)] == "notes")) {
         .notes <- raw[2:nrow(raw), ncol(raw)]
         .notes[is.na(.notes)] <- ""
@@ -259,7 +264,7 @@ format.tables <- setRefClass(
       # keep just the data, remove NA row (first row)
       raw <- raw[-1, ]
       
-      #column names
+      # column names
       if (has.column.names) {
         .column.names <- as.character(raw[1, ])
         .column.names[is.na(.column.names)] <- ""
@@ -271,7 +276,7 @@ format.tables <- setRefClass(
         raw <- raw[-1, ]
       }
       
-      #data
+      # data
       .data <- raw
       if (convert.data) {
         for (i in 1:ncol(.data)) {
@@ -289,7 +294,7 @@ format.tables <- setRefClass(
       
       
       
-      #naming the notes with the number of the note respective
+      # naming the notes with the number of the note respective
       # move this to add_notes function
       if (!is.null(.self$names.note) && .self$names.note != "")
         names(.self$names.note) <- "1"
