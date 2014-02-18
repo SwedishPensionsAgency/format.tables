@@ -192,8 +192,6 @@ format.tables <- setRefClass(
                                 row.names = FALSE, 
                                 col.names = FALSE), 
                            list(...))
-        
-        write.table(x = export.data, file = file, na = "", row.names = FALSE, col.names = FALSE, ...)
       }
       
     }, 
@@ -203,7 +201,7 @@ format.tables <- setRefClass(
                     has.column.names = ft.opts.get("has.column.names", "read", TRUE), 
                     convert.data = ft.opts.get("convert.data", "read", TRUE), 
                     dec = ft.opts.get("dec", "read", "."), 
-                    na.strings = ft.opts.get("na.strings", "read", ""), 
+                    na.strings = ft.opts.get("na.strings", "read", "NA"), 
                     ...){
       
       #initialize variables 
@@ -213,6 +211,8 @@ format.tables <- setRefClass(
       .names.style <- NULL
       .names.note <- NULL
       
+      # blanks are also treated as NAs
+      na.strings <- c("", na.strings)
       
       ft.opts.read <- ft.opts.get("read", domain = NULL, default = NULL)
       if (is.null(ft.opts.read))
@@ -242,9 +242,9 @@ format.tables <- setRefClass(
         raw <- raw[-(1:separation.index), ]
       }
       # styles 
-      if (!isTRUE(raw[1, 1] == "styles")) {
+      if (!isTRUE(raw[1, 1] == "styles"))
         stop("There is no style column in your data. Please add one and name it with 'styles'. ")
-      }
+
       .styles <- raw[2:nrow(raw), 1]
       raw[, 1] <- NULL
       
@@ -291,14 +291,14 @@ format.tables <- setRefClass(
       
       #naming the notes with the number of the note respective
       # move this to add_notes function
-      if (!is.null(.self$names.note) && .self$names.note != "") {
+      if (!is.null(.self$names.note) && .self$names.note != "")
         names(.self$names.note) <- "1"
-      }
+
       if (!is.null(.self$notes)) {
         offset <- 0
-        if (!is.null(.self$names.note) && .self$names.note != "") {
+        if (!is.null(.self$names.note) && .self$names.note != "")
           offset <- 1
-        }
+        
         names(.self$notes)[.self$notes != ""] <- (1+offset):(length(.self$notes[.self$notes != ""])+offset)
       }
       
