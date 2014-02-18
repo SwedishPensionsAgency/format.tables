@@ -1,7 +1,7 @@
 Package: format.tables
 Type: Package
 Title: Formatting tables for LaTeX and HTML
-Version: 0.1
+Version: 0.1.1
 Date: 2013-12-20
 Author: Cedric Perriard
 Maintainer: Cedric Perriard <cedric.perriard@pensionsmyndigheten.se>

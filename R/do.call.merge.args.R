@@ -17,21 +17,22 @@ do.call.merge.args <- function(FUN, ...){
   default.args <- formals(FUN)
   args <- default.args[!names(default.args) %in% c("", "...")]
   
-  if(is.null(args))
+  if (is.null(args))
     args <- list()
   
   # 2. arguments passed to ... in order of appereance
   argument.list <- list(...)
   
-  for (i in 1:length(argument.list)){
-    if(!"list" %in% class(argument.list[[i]])){
+  for (i in 1:length(argument.list)) {
+    if (!"list" %in% class(argument.list[[i]]))
       argument.list[[i]] <- as.list(argument.list[[i]])
-    }
+      
     args <- arguments.merge(args, argument.list[[i]], FUN = FUN, append = ifelse(is.primitive(FUN), 
                                                                                  TRUE, 
                                                                                  "..." %in% names(formals(FUN))))
   }
   
   # call the function with the merged arguments and return the result
-  return(do.call(FUN, args))
+  # args can contain names of arguments in args as values that should be evaluated; hence envir = list2env(args) is needed
+  return(do.call(FUN, args, envir = list2env(args)))
 }

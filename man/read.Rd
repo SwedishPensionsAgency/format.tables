@@ -15,7 +15,7 @@
   \item{dec}{decimal separator, used for type conversion}
 
   \item{na.strings}{passed to \code{\link{read.table}},
-  default "NA"}
+  default "NA" and blanks ("") are always treated as NAs}
 
   \item{...}{parameters passed to read.table}
 }

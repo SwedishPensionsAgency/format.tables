@@ -45,10 +45,11 @@ format.tables <- setRefClass(
                           file = NULL, 
                           ...) {
       
-      if(class(data) == "character" & is.null(file)) file <- data
-      if (!is.null(file)){
+      if (class(data) == "character" & is.null(file)) 
+        file <- data
+      if (!is.null(file)) {
         read(file, ...)
-      }else{
+      } else {
         
         # change to functions with tests
         .self$data <- data
@@ -74,45 +75,45 @@ format.tables <- setRefClass(
       if (!is.data.frame(.self$data)) {
         stop("Only data.frame or data.table are supported")
       }
-      if (!is.null(.self$names.note) && class(.self$names.note) != "character"){
+      if (!is.null(.self$names.note) && class(.self$names.note) != "character") {
         stop("names.note must be either NULL or of class character. The input was of class ", class(.self$names.note), ".")
       }
-      if (!is.null(.self$notes) && class(.self$notes) != "character"){
+      if (!is.null(.self$notes) && class(.self$notes) != "character") {
         stop("notes must be either NULL or of class character. The input was of class ", class(.self$notes), ".")
       }
-      if (!is.null(.self$header) && class(.self$header) != "list"){
+      if (!is.null(.self$header) && class(.self$header) != "list") {
         stop("invalid assignment for reference class field \"header\", should be from class \u201clist\u201d or a subclass (was class '", class(header), "')")
       }
-      if (!is.null(.self$column.names) && class(.self$column.names) != "character"){
+      if (!is.null(.self$column.names) && class(.self$column.names) != "character") {
         stop("invalid assignment for reference class field \"column.names\", should be from class \u201ccharacter\u201d or a subclass (was class '", class(.self$column.names), "')")
       }
-      if (!is.null(.self$names.style) && class(.self$names.style) != "character"){
+      if (!is.null(.self$names.style) && class(.self$names.style) != "character") {
         stop("invalid assignment for reference class field \"names.style\", should be from class \u201ccharacter\u201d or a subclass (was class '", class(.self$names.style), "')")
       }
       
-      if (nrow(.self$data) != length(.self$styles)){
+      if (nrow(.self$data) != length(.self$styles)) {
         stop("'data' and 'style' must have the same row count/length")
       }
-      if (!is.null(.self$column.names) && ncol(.self$data) != length(.self$column.names)){
+      if (!is.null(.self$column.names) && ncol(.self$data) != length(.self$column.names)) {
         stop("'data' and 'column.names' must have the same column count/length")
       }
-      if (!is.null(.self$column.names) & is.null(.self$names.style)){
+      if (!is.null(.self$column.names) & is.null(.self$names.style)) {
         stop("if you provide 'column.names' you must also provide 'names.style'")
       }
       
-      if (!is.null(.self$notes) && nrow(.self$data) != length(.self$notes)){
+      if (!is.null(.self$notes) && nrow(.self$data) != length(.self$notes)) {
         stop("'data' and 'notes' must have the same row count/length")
       }
       
-      if (is.null(.self$column.names) & !is.null(.self$names.style)){
+      if (is.null(.self$column.names) & !is.null(.self$names.style)) {
         warning("you provided 'names.style' but no 'column.names', 'names.style' will be discarded")
         .self$names.style <- NULL
       }
-      if (!is.null(.self$notes) & !is.null(.self$column.names) & is.null(.self$names.note)){
+      if (!is.null(.self$notes) & !is.null(.self$column.names) & is.null(.self$names.note)) {
         warning("you provided 'notes' and 'column.names' but no 'names.note'. 'names.note' will be set to an empty character string.")
         .self$names.note <- ""
       }
-      if (is.null(.self$notes) & !is.null(.self$names.note)){
+      if (is.null(.self$notes) & !is.null(.self$names.note)) {
         warning("you provided 'names.note' but no 'notes', 'names.note' will be discarded")
         .self$names.note <- NULL
       }
@@ -120,25 +121,32 @@ format.tables <- setRefClass(
     print = function(type, template = ""){
       base::print(type)
     }, 
-    write = function(file = "", dec = ".", ...){
+    write = function(file = "", dec = ft.opts.get("dec", "write", "."), ...){
       sanitize()
       
       export.data <- .self$data
       
-      for (i in 1:ncol(export.data)){
-        if(class(export.data[, i]) != "character" & typeof(export.data[, i]) != "character"){
-          export.data[, i] <- format(export.data[, i], 
-                                     decimal.mark = dec, 
-                                     scientific = FALSE)
+      # change decimal mark for converting numeric to character
+      OutDec <- getOption("OutDec")
+      options(OutDec = dec)
+      
+      # convert numeric to character, as.character is used as it is more convenient than format or formatC
+      for (i in 1:ncol(export.data)) {
+        if (class(export.data[, i]) != "character" & typeof(export.data[, i]) != "character") {
+          export.data[, i] <- as.character(export.data[, i]) 
         }
       }
+      
+      # restore OutDec option
+      options(OutDec = OutDec)
       
       #putting together styles, data, and notes
       .styles <- .self$styles
       .notes <- .self$notes
-      if(!is.null(.self$names.style)){
+      if (!is.null(.self$names.style)) {
         .styles <- c(.self$names.style, .styles)
-        if(!is.null(.notes)) .notes <- c(ifelse(is.null(.self$names.note), NA, .self$names.note), .notes)
+        if (!is.null(.notes)) 
+          .notes <- c(ifelse(is.null(.self$names.note), NA, .self$names.note), .notes)
         export.data <- rbind(.self$column.names, export.data)
       } 
       .styles <- c("styles", .styles)
@@ -147,17 +155,21 @@ format.tables <- setRefClass(
       
       export.data <- cbind(.styles, export.data, stringsAsFactors = FALSE)
       
-      if(!is.null(.notes)) export.data <- cbind(export.data, c("notes", .notes), stringsAsFactors = FALSE)
+      if (!is.null(.notes)) 
+        export.data <- cbind(export.data, c("notes", .notes), stringsAsFactors = FALSE)
       
 
-      .header <- data.frame(keys = names(.self$header), values = unlist(.self$header))
+      .header <- data.frame(keys = names(.self$header), 
+                            values = unlist(.self$header), 
+                            stringsAsFactors = FALSE)
 
       # adding columns to fit the width of the data
       export.header <- cbind(.header, 
                              matrix(rep(NA, (ncol(export.data)-ncol(.header))*nrow(.header)), 
                                     ncol =  ncol(export.data)-ncol(.header) 
-                             ) 
-      )
+                             ), 
+                             stringsAsFactors = FALSE
+                             )
       names(export.data) <- names(export.header)
       
       export.data <- rbind(export.header, rep(NA, ncol(export.header)), export.data)
@@ -165,20 +177,31 @@ format.tables <- setRefClass(
       names(export.data) <- paste0("V", 1:ncol(export.data))
       row.names(export.data) <- 1:nrow(export.data)
       
-      if (file == ""){
+      if (file == "") {
         print(export.data)
-      }else{
-        write.table(x = export.data, file = file, na = "", row.names = FALSE, col.names = FALSE, ...)
+      } else {
+        ft.opts.write <- ft.opts.get("write", domain = NULL, default = NULL)
+        if (is.null(ft.opts.write))
+          ft.opts.write <- list()
+        
+        do.call.merge.args(FUN=write.table, 
+                           ft.opts.write, 
+                           list(x = export.data, 
+                                file = file, 
+                                na = "", 
+                                row.names = FALSE, 
+                                col.names = FALSE), 
+                           list(...))
       }
       
     }, 
     
     #' see read.R for documentation
     read = function(file, 
-                    has.column.names = TRUE, 
-                    convert.data = TRUE, 
-                    dec = ".", 
-                    na.strings = "", 
+                    has.column.names = ft.opts.get("has.column.names", "read", TRUE), 
+                    convert.data = ft.opts.get("convert.data", "read", TRUE), 
+                    dec = ft.opts.get("dec", "read", "."), 
+                    na.strings = ft.opts.get("na.strings", "read", "NA"), 
                     ...){
       
       #initialize variables 
@@ -188,14 +211,25 @@ format.tables <- setRefClass(
       .names.style <- NULL
       .names.note <- NULL
       
-      raw <- read.table(file, 
-                        na.strings = na.strings, 
-                        stringsAsFactors = FALSE, 
-                        colClasses = "character", 
-                        ...)
+      # blanks are also treated as NAs
+      na.strings <- c("", na.strings)
+      
+      ft.opts.read <- ft.opts.get("read", domain = NULL, default = NULL)
+      if (is.null(ft.opts.read))
+        ft.opts.read <- list()
+      
+      # read from file
+      raw <- do.call.merge.args(FUN=read.table, 
+                                ft.opts.read, 
+                                list(file = file, 
+                                     na.strings = na.strings, 
+                                     stringsAsFactors = FALSE, 
+                                     colClasses = "character", 
+                                     header = FALSE), 
+                                list(...))
       
       #there has to be a line with only NAs between the header and the data
-      if (sum(rowSums(is.na(raw)) == ncol(raw), na.rm = TRUE) > 0){
+      if (sum(rowSums(is.na(raw)) == ncol(raw), na.rm = TRUE) > 0) {
         separation.index <- which.max(rowSums(is.na(raw)) == ncol(raw))
         
         #header: keys -> values 
@@ -208,14 +242,14 @@ format.tables <- setRefClass(
         raw <- raw[-(1:separation.index), ]
       }
       # styles 
-      if(!isTRUE(raw[1, 1] == "styles")){
+      if (!isTRUE(raw[1, 1] == "styles"))
         stop("There is no style column in your data. Please add one and name it with 'styles'. ")
-      }
+
       .styles <- raw[2:nrow(raw), 1]
       raw[, 1] <- NULL
       
       #notes 
-      if (isTRUE(raw[1, ncol(raw)] == "notes")){
+      if (isTRUE(raw[1, ncol(raw)] == "notes")) {
         .notes <- raw[2:nrow(raw), ncol(raw)]
         .notes[is.na(.notes)] <- ""
         raw[, ncol(raw)] <- NULL
@@ -226,7 +260,7 @@ format.tables <- setRefClass(
       raw <- raw[-1, ]
       
       #column names
-      if(has.column.names){
+      if (has.column.names) {
         .column.names <- as.character(raw[1, ])
         .column.names[is.na(.column.names)] <- ""
         .names.style <- .styles[1]
@@ -239,15 +273,9 @@ format.tables <- setRefClass(
       
       #data
       .data <- raw
-      if (convert.data){
-        for (i in 1:ncol(.data)){
-          #col <- type.convert(as.character(.data[, i]), dec = dec, as.is = TRUE)
+      if (convert.data) {
+        for (i in 1:ncol(.data)) {
           .data[[i]] <- type.convert(.data[[i]], dec = dec, as.is = TRUE)
-#           if (class(col) != "factor"){
-#             .data[, i] <- col
-#           }else{
-#             .data[, i] <- as.character(.data[, i])
-#           }
         }
       }
       
@@ -263,63 +291,62 @@ format.tables <- setRefClass(
       
       #naming the notes with the number of the note respective
       # move this to add_notes function
-      if (!is.null(.self$names.note) && .self$names.note != ""){
+      if (!is.null(.self$names.note) && .self$names.note != "")
         names(.self$names.note) <- "1"
-      }
-      if (!is.null(.self$notes)){
+
+      if (!is.null(.self$notes)) {
         offset <- 0
-        if (!is.null(.self$names.note) && .self$names.note != ""){
+        if (!is.null(.self$names.note) && .self$names.note != "")
           offset <- 1
-        }
+        
         names(.self$notes)[.self$notes != ""] <- (1+offset):(length(.self$notes[.self$notes != ""])+offset)
       }
       
     }, 
     
     #' see the file render.R for documentation 
-    render = function(table.template = NULL, 
-                      row.template = NULL, 
-                      type = "tex",
-                      collapse = NULL,
-                      format = "f",
-                      digits = NULL,
-                      NA.string.formatted = "",
-                      NA.string.value = "", 
+    render = function(table.template = ft.opts.get("table.template", "render", NULL), 
+                      row.template = ft.opts.get("row.template", "render", NULL), 
+                      type = ft.opts.get("type", "render", "tex"),
+                      collapse = ft.opts.get("collapse", "render", NULL),
+                      format = ft.opts.get("format", "render", "f"),
+                      digits = ft.opts.get("digits", "render", NULL),
+                      NA.string.formatted = ft.opts.get("NA.string.formatted", "render", ""),
+                      NA.string.value = ft.opts.get("NA.string.value", "render", ""), 
                       ...){
 
+      ft.opts.render <- ft.opts.get("render", domain = NULL, default = NULL)
+      if (is.null(ft.opts.render))
+        ft.opts.render <- list()
+      
       # table id: can be used per row or in table template
       table.id <- .self$header$id
-      if (is.null(table.id)){
-        table.id <- paste0("tbl_", paste(sample(letters, 8, replace=TRUE), collapse=""))
-      }
-      
-      
+      if (is.null(table.id))
+        table.id <- paste0("tbl_", paste(sample(letters, 8, replace=TRUE), collapse=""))      
       
       # type specific 
       collapse.tmp <- ""
-      if (type == "tex"){
+      if (type == "tex") {
         if (is.null(table.template))
           table.template <- system.file("template", "ctable.whisker", package = getPackageName())
         if (is.null(row.template))
           row.template <- system.file("template", "tex.rows.yaml", package = getPackageName())
         collapse.tmp <- " & "
-      }else if (type == "html"){
+      } else if (type == "html") {
         if (is.null(table.template))
           table.template <- system.file("template", "html.whisker", package = getPackageName())
         if (is.null(row.template))
           row.template <- system.file("template", "html.rows.yaml", package = getPackageName())
         collapse.tmp <- ""
-      }else if (type == ""){
-        if(is.null(table.template) | is.null(row.template)){
+      } else if (type == "") {
+        if(is.null(table.template) | is.null(row.template))
           stop("If you choose 'type = \"\"' you must provide both table.template and row.template.")
-        }
-      }else{
+      } else {
         stop("'type' must be 'tex', 'html' or an empty string.")
       }
       
-      if(is.null(collapse)){
+      if (is.null(collapse))
         collapse <- collapse.tmp
-      }
       
       # read table template
       table.template.whisker <- paste(readLines(table.template, warn = FALSE), collapse = "\n")
@@ -342,9 +369,8 @@ format.tables <- setRefClass(
       #' Code borrowed from  Edwin de Jonge <edwindjonge@gmail.com> from the whisker-package
       rxsplit <- function(x, pattern){
         matched <- regexpr(pattern, x)
-        if (matched == -1){
+        if (matched == -1)
           return(x)
-        }
         ml <- attr(matched, "match.length")
         c( substring(x,1,matched-1)
            , substring(x,matched, matched+ml-1)
@@ -356,12 +382,12 @@ format.tables <- setRefClass(
       rx <- rxsplit(table.template.whisker, delimtag)
 
       whisker.delimiter <- unlist(strsplit(sub(delimtag, "\\1", rx[2]), " "))
-      if (is.na(whisker.delimiter) || length(whisker.delimiter) == 0) whisker.delimiter <- c("{{", "}}")
+      if (is.na(whisker.delimiter) || length(whisker.delimiter) == 0) 
+        whisker.delimiter <- c("{{", "}}")
       
       # if the row template contains the element "whiskerSetDelimiter" use it as whisker delimiter
-      if(!is.null(rows.template[["whiskerSetDelimiter"]])){
+      if (!is.null(rows.template[["whiskerSetDelimiter"]]))
         whisker.delimiter <- unlist(strsplit(sub(delimtag, "\\1", rows.template[["whiskerSetDelimiter"]]), " "))
-      }
       
       whisker.delimiter.change <- ""
       if (whisker.delimiter[1] != "{{" | whisker.delimiter[2] != "}}") 
@@ -372,43 +398,48 @@ format.tables <- setRefClass(
       # get template for a specific row
       get_row_template <- function(style.name){
         tmp <- rows.template[[style.name]]
-        if (!is.null(tmp)){
+        if (!is.null(tmp)) {
           return(tmp)
-        }else if(!is.null(rows.template[["default"]])){
+        } else if (!is.null(rows.template[["default"]])) {
           return(rows.template[["default"]])
-        }else{
+        } else {
           return(paste0(whisker.delimiter[1], "&value", whisker.delimiter[2]))
         }
       }
       
       ##########
       # should the rounding beeing overwritten? 
-      if(!is.null(.self$header$digits)){
-        digits <- rep_len(as.numeric(strsplit(.self$header$digits, "\\|")[[1]]), ncol(.self$data))
-      }
+      if (!is.null(.self$header$digits))
+        digits <- as.numeric(strsplit(.self$header$digits, "\\|")[[1]])
       
+      # replicate digits and format to match ncol
+      if (!is.null(digits))
+        digits <- rep_len(digits, ncol(.self$data))
       format <- rep_len(format, ncol(.self$data))
       
       ##########
       # apply (whisker) template on all cells of one row
-      apply_template_row <- function(template, data, note, ...){
+      apply_template_row <- function(template, data, note, format = NULL, digits = NULL, ...){
         formatted <- c()
-        for (i in 1:length(data)){
-          if (class(data[[i]]) != "character"){
-            formatted[i] <- formatC(data[[i]], format = format[i], digits = digits[i], ...)
-          }else{
+        
+        for (i in 1:length(data)) {
+          if (class(data[[i]]) != "character") {
+            formatted[i] <- do.call.merge.args(FUN = formatC, 
+                               ft.opts.render, 
+                               list(x = data[[i]], format = format[i], digits = digits[i]), 
+                               list(...))
+          } else {
             formatted[i] <- data[[i]]
           }
         }
         formatted <- unlist(formatted)
-        if (any(is.na(unlist(data)))){
+        if (any(is.na(unlist(data))))
           formatted[is.na(unlist(data))] <- NA.string.formatted
-        }
+        
         row <- sapply(1:length(data), function(i){
           whisker.data <- list(ncol = length(data), value = ifelse(is.na(data[[i]]), NA.string.value, data[[i]]), formatted = formatted[i], colNumber = i, id = table.id)
-          if (!is.null(note) && note != ""){
+          if (!is.null(note) && note != "")
             whisker.data <- c(whisker.data, list(noteNumber = names(note)))
-          }
           k <- ifelse(i > length(template), length(template), i)
           
           # get delimiter from template: first row
@@ -422,10 +453,12 @@ format.tables <- setRefClass(
       tableRows.names <- list(list(tableRow = paste(apply_template_row(template = get_row_template(.self$names.style), 
                                                                        data = as.list(.self$column.names), 
                                                                        note = .self$names.note, 
+                                                                       format = format, 
+                                                                       digits = digits, 
                                                                        ...), 
                                                     collapse = collapse)
       ))
-      if(!is.null(tableRows.names)){
+      if (!is.null(tableRows.names)) {
         tableRows.names[[1]][[.self$names.style]] <- TRUE
         tableRows.names[[1]][["style"]] <- .self$names.style
         tableRows.names[[1]][["id"]] <- table.id
@@ -436,7 +469,10 @@ format.tables <- setRefClass(
       tableRows.data <- as.list(sapply(1:nrow(.self$data), function(i, ...){
         row.list <- list(tableRow = paste(apply_template_row(template = get_row_template(.self$styles[i]), 
                                                              data = as.list(.self$data[i, ]), 
-                                                             note = .self$notes[i], ...)
+                                                             note = .self$notes[i],
+                                                             format = format, 
+                                                             digits = digits, 
+                                                             ...)
                                           , collapse = collapse)
         )
         row.list[[.self$styles[i]]] <- TRUE
@@ -446,21 +482,21 @@ format.tables <- setRefClass(
       }, ...))
       
       # putting together column names and data rows
-      if (!is.null(.self$column.names)){
+      if (!is.null(.self$column.names)) {
         tableRows = list(tableRows =  c(tableRows.names, tableRows.data))
-      }else{
+      } else {
         tableRows = list(tableRows =  tableRows.data)
       }
       
       ##########
       # notes
       rowNotes <- NULL
-      if (!is.null(.self$notes)){
+      if (!is.null(.self$notes)) {
         .notes <- c(.self$names.note, .self$notes)
         .notes <- .notes[!is.na(.notes) & .notes != ""]
         names(.notes) <- 1:length(.notes)
         rowNotes <- list(rowNotes = iteratelist(.notes, name = "number", value = "note"))
-        for (i in 1:length(rowNotes$rowNotes)){
+        for (i in 1:length(rowNotes$rowNotes)) {
           rowNotes$rowNotes[[i]]$id <- table.id
         }
       }
@@ -470,9 +506,8 @@ format.tables <- setRefClass(
       header.whisker <- c(.self$header, list(ncol = ncol(.self$data), id = table.id))
 
       whisker.data <- c(header.whisker, tableRows)
-      if (!is.null(rowNotes)){
+      if (!is.null(rowNotes))
         whisker.data <- c(whisker.data, rowNotes)
-      }
       
       return(whisker.render(table.template.whisker, data = whisker.data))
     }
