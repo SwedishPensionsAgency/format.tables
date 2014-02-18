@@ -315,7 +315,7 @@ format.tables <- setRefClass(
                       type = ft.opts.get("type", "render", "tex"),
                       collapse = ft.opts.get("collapse", "render", NULL),
                       format = ft.opts.get("format", "render", "f"),
-                      digits = ft.opts.get("digits", "render", NULL),
+                      digits = ft.opts.get("digits", "render", 0),
                       NA.string.formatted = ft.opts.get("NA.string.formatted", "render", ""),
                       NA.string.value = ft.opts.get("NA.string.value", "render", ""), 
                       ...){

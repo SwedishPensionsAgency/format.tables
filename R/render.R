@@ -46,7 +46,7 @@
 #' @param type "latex" or "html" supported, in "latex" cells are collapsed with " & ", in "html" with ""
 #' @param collapse string for collapsing cells, overrides the standards used in the type parameter
 #' @param format passed to \code{\link{formatC}}, can be a vector of variable length that is replicated to the number of columns
-#' @param digits passed to \code{\link{formatC}}, can be a vector of variable length that is replicated to the number of columns. Is overwritten by .self$header$digits which is a pipe ("|") seperated string, e.g. "3|3|1|0" 
+#' @param digits passed to \code{\link{formatC}}, can be a vector of variable length that is replicated to the number of columns. Default is \code{0}. Is overwritten by .self$header$digits which is a pipe ("|") seperated string, e.g. "3|3|1|0" 
 #' @param NA.string.formatted string to be used for NA values in the formatted template tag, default value is ""
 #' @param NA.string.value string to be used for NA values in the value template tag, default value is ""
 #' @param ... passed to \code{\link{formatC}}, e.g. decimal.mark, big.mark

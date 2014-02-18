@@ -20,8 +20,9 @@
 
   \item{digits}{passed to \code{\link{formatC}}, can be a
   vector of variable length that is replicated to the
-  number of columns. Is overwritten by .self$header$digits
-  which is a pipe ("|") seperated string, e.g. "3|3|1|0"}
+  number of columns. Default is \code{0}. Is overwritten by
+  .self$header$digits which is a pipe ("|") seperated
+  string, e.g. "3|3|1|0"}
 
   \item{NA.string.formatted}{string to be used for NA
   values in the formatted template tag, default value is
