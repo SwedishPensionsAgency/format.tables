@@ -24,9 +24,9 @@ do.call.merge.args <- function(FUN, ...){
   argument.list <- list(...)
   
   for (i in 1:length(argument.list)) {
-    if (!"list" %in% class(argument.list[[i]])) {
+    if (!"list" %in% class(argument.list[[i]]))
       argument.list[[i]] <- as.list(argument.list[[i]])
-    }
+      
     args <- arguments.merge(args, argument.list[[i]], FUN = FUN, append = ifelse(is.primitive(FUN), 
                                                                                  TRUE, 
                                                                                  "..." %in% names(formals(FUN))))

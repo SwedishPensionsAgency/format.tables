@@ -18,9 +18,9 @@ arguments.merge <- function(
   append = ifelse(is.null(FUN), 
                   TRUE, 
                   "..." %in% names(formals(FUN)))) {
-  if (!append) {
+  if (!append)
     y[!names(y) %in% names(x)] <- NULL
-  }
+
   x[names(y)] = y
   return(x)
 }
