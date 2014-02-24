@@ -416,7 +416,7 @@ format.tables <- setRefClass(
       # should the rounding beeing overwritten? 
       if (!is.null(.self$header$digits) && is.character(.self$header$digits))
         digits <- as.numeric(strsplit(.self$header$digits, "\\|")[[1]])
-      else
+      else if (!is.null(.self$header$digits))
         digits <- .self$header$digits
       
       # replicate digits and format to match ncol
