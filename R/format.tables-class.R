@@ -278,11 +278,17 @@ format.tables <- setRefClass(
       
       # data
       .data <- raw
+      
+      if (!is.data.frame(.data))
+        .data <- as.data.frame(.data, stringsAsFactors = FALSE)
+      
       if (convert.data) {
         for (i in 1:ncol(.data)) {
           .data[[i]] <- type.convert(.data[[i]], dec = dec, as.is = TRUE)
         }
       }
+      
+      names(.data) <- paste0("V", 1:ncol(.data))
       
       .self$data <- .data
       .self$styles <- .styles
@@ -457,18 +463,20 @@ format.tables <- setRefClass(
       
       ##########
       # column names
-      tableRows.names <- list(list(tableRow = paste(apply_template_row(template = get_row_template(.self$names.style), 
-                                                                       data = as.list(.self$column.names), 
-                                                                       note = .self$names.note, 
-                                                                       format = format, 
-                                                                       digits = digits, 
-                                                                       ...), 
-                                                    collapse = collapse)
-      ))
-      if (!is.null(tableRows.names)) {
-        tableRows.names[[1]][[.self$names.style]] <- TRUE
-        tableRows.names[[1]][["style"]] <- .self$names.style
-        tableRows.names[[1]][["id"]] <- table.id
+      if (!is.null(.self$column.names)) {
+        tableRows.names <- list(list(tableRow = paste(apply_template_row(template = get_row_template(.self$names.style), 
+                                                                         data = as.list(.self$column.names), 
+                                                                         note = .self$names.note, 
+                                                                         format = format, 
+                                                                         digits = digits, 
+                                                                         ...), 
+                                                      collapse = collapse)
+        ))
+        if (!is.null(tableRows.names)) {
+          tableRows.names[[1]][[.self$names.style]] <- TRUE
+          tableRows.names[[1]][["style"]] <- .self$names.style
+          tableRows.names[[1]][["id"]] <- table.id
+        }
       }
       
       ##########
