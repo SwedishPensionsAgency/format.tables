@@ -4,6 +4,7 @@
 <%#firstColWidth%>\setlength\firstcolwidth{ <%&firstColWidth%> } %
 <%/firstColWidth%><%^firstColWidth%>\toggletrue{firstcolNoIntend} %
 <%/firstColWidth%>\setcounter{colcount}{ <%&ncol%>-1}%
+\captionsetup{labelformat=<%^captionLabelFormat%>empty<%/captionLabelFormat%><%&captionLabelFormat%> }%
 \ctable[ %options
 <%#bgopacity%>bgopacity=<%&bgopacity%>, %
 <%/bgopacity%><%#botcap%>botcap, %
@@ -20,8 +21,8 @@
 <%/framesep%><%#label%>label={\relax{}<%&label%> }, %
 <%/label%><%#maxwidth%>maxwidth=<%&maxwidth%>, %
 <%/maxwidth%><%#mincapwidth%>mincapwidth=<%&mincapwidth%>, %
-<%/mincapwidth%><%#pos%>pos=<%&pos%>, %
-<%/pos%><%#width%>width=<%&width%>, %
+<%/mincapwidth%>pos=<%^pos%>H<%/pos%><%&pos%>, %
+<%#width%>width=<%&width%>, %
 <%/width%><%#captionsleft%>captionsleft, %
 <%/captionsleft%><%#captionsright%>captionsright, %
 <%/captionsright%><%#captionsinside%>captionsinside, %
