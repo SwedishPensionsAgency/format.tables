@@ -14,6 +14,10 @@
 
   \item{dec}{decimal separator, used for type conversion}
 
+  \item{sep}{the field separator character. Values on each
+  line of the file are separated by this character, default
+  is ","}
+
   \item{na.strings}{passed to \code{\link{read.table}},
   default "NA" and blanks ("") are always treated as NAs}
 

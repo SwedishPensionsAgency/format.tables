@@ -121,7 +121,7 @@ format.tables <- setRefClass(
     print = function(type, template = ""){
       base::print(type)
     }, 
-    write = function(file = "", dec = ft.opts.get("dec", "write", "."), ...){
+    write = function(file = "", dec = ft.opts.get("dec", "write", "."), sep = ft.opts.get("sep", "write", ","), ...){
       sanitize()
       
       export.data <- .self$data
@@ -189,6 +189,7 @@ format.tables <- setRefClass(
                            list(x = export.data, 
                                 file = file, 
                                 na = "", 
+                                sep = sep, 
                                 row.names = FALSE, 
                                 col.names = FALSE), 
                            list(...))
@@ -201,6 +202,7 @@ format.tables <- setRefClass(
                     has.column.names = ft.opts.get("has.column.names", "read", TRUE), 
                     convert.data = ft.opts.get("convert.data", "read", TRUE), 
                     dec = ft.opts.get("dec", "read", "."), 
+                    sep = ft.opts.get("sep", "read", ","),
                     na.strings = ft.opts.get("na.strings", "read", "NA"), 
                     ...){
       
@@ -222,6 +224,8 @@ format.tables <- setRefClass(
       raw <- do.call.merge.args(FUN=read.table, 
                                 ft.opts.read, 
                                 list(file = file, 
+                                     dec = dec, 
+                                     sep = sep, 
                                      na.strings = na.strings, 
                                      stringsAsFactors = FALSE, 
                                      colClasses = "character", 

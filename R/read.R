@@ -6,6 +6,7 @@
 #' @param has.column.names does the table contain a row with column names that are of a different type than the data?
 #' @param convert.data should the data be processed with \code{\link{type.convert}}?
 #' @param dec decimal separator, used for type conversion
+#' @param sep the field separator character. Values on each line of the file are separated by this character, default is ","
 #' @param na.strings passed to \code{\link{read.table}}, default "NA" and blanks ("") are always treated as NAs
 #' @param ... parameters passed to read.table
 #' 

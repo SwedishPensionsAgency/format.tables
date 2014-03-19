@@ -9,6 +9,10 @@
   \item{dec}{the string to use for decimal points in
   numeric or complex columns: must be a single character.}
 
+  \item{sep}{the field separator string. Values within each
+  row of the data are separated by this string, default is
+  ","}
+
   \item{...}{parameters passed to
   \code{\link{write.table}}, \code{row.names} is not
   available as it is set to false by default.}
