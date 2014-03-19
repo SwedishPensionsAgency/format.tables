@@ -2,7 +2,8 @@
 
 \begin{identity}%
 <%#firstColWidth%>\setlength\firstcolwidth{ <%&firstColWidth%> } %
-<%/firstColWidth%><%^firstColWidth%>\toggletrue{firstcolNoIntend} %
+\togglefalse{firstColNoIndent} %
+<%/firstColWidth%><%^firstColWidth%>\toggletrue{firstColNoIndent} %
 <%/firstColWidth%>\setcounter{colcount}{ <%&ncol%>-1}%
 \captionsetup{labelformat=<%^captionLabelFormat%>empty<%/captionLabelFormat%><%&captionLabelFormat%> }%
 \ctable[ %options
