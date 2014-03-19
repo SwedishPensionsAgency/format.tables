@@ -37,7 +37,7 @@ format.tables <- setRefClass(
   methods = list(
     initialize = function(data = NULL, 
                           styles, 
-                          column.names, 
+                          column.names = names(data), 
                           names.style, 
                           header, 
                           names.note = NULL, 
@@ -45,8 +45,6 @@ format.tables <- setRefClass(
                           file = NULL, 
                           ...) {
       
-      if (class(data) == "character" & is.null(file)) 
-        file <- data
       if (!is.null(file)) {
         read(file, ...)
       } else {
@@ -132,8 +130,8 @@ format.tables <- setRefClass(
       
       # convert numeric to character, as.character is used as it is more convenient than format or formatC
       for (i in 1:ncol(export.data)) {
-        if (class(export.data[, i]) != "character" & typeof(export.data[, i]) != "character") {
-          export.data[, i] <- as.character(export.data[, i]) 
+        if (class(export.data[[i]]) != "character" & typeof(export.data[[i]]) != "character") {
+          export.data[[i]] <- as.character(export.data[[i]]) 
         }
       }
       
