@@ -265,6 +265,9 @@ format.tables <- setRefClass(
       
       # keep just the data, remove NA row (first row)
       raw <- raw[-1, ]
+      # if raw is just one column it is converted to a vector, convert it back to a data frame
+      if (!is.data.frame(raw)) 
+        raw <- as.data.frame(raw, stringsAsFactors = FALSE)
       
       # column names
       if (has.column.names) {
