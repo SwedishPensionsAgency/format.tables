@@ -1,6 +1,6 @@
 #' Escaping for LaTeX
 #' 
-#' Escaping {}[] in character vectors, lists, data frames, and data tables for use in LaTeX
+#' Escaping \code{{}[]\%} in character vectors, lists, data frames, and data tables for use in LaTeX
 #' 
 #' 
 #' @param x character vector, list, data frame, or data table
@@ -14,6 +14,7 @@ latex_escape <- function(x){
       out <- gsub("\\}", "\\\\}", out)
       out <- gsub("\\[", "\\\\[", out)
       out <- gsub("\\]", "\\\\]", out)
+      out <- gsub("\\%", "\\\\%", out)
     } else {
       out <- x
     }

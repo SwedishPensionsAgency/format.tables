@@ -9,7 +9,7 @@ latex_escape(x)
   table}
 }
 \description{
-Escaping {}[] in character vectors, lists, data frames, and
-data tables for use in LaTeX
+Escaping \code{{}[]\%} in character vectors, lists, data
+frames, and data tables for use in LaTeX
 }
 
