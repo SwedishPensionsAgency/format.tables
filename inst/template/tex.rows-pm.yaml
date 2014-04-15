@@ -48,3 +48,6 @@ small-2-last:
 small-3-last: 
 - "\pmSmallLabelLast{3em}{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
 - "\pmSmall{\relax{}<%&formatted%>\relax}"
+plain-0-toprule:
+- "\pmPlainToprule{\relax{}<%&formatted%><%#noteNumber%>\tmark[<%&noteNumber%>]<%/noteNumber%>\relax}"
+- "\pmPlain{ <%&formatted%>\relax}"
