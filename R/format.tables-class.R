@@ -16,7 +16,7 @@
 #' @import whisker
 #' @import methods
 #' @import yaml
-#' @aliases format.tables
+#' @aliases format.tables format.table
 #' 
 #' @export
 format.tables <- setRefClass(
