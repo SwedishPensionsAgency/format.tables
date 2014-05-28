@@ -19,7 +19,7 @@
 <%/framefg%><%#framebg%>framebg=<%&framebg%>, %
 <%/framebg%><%#framerule%>framerule=<%&framerule%>, %
 <%/framerule%><%#framesep%>framesep=<%&framesep%>, %
-<%/framesep%><%#label%>label={\relax{}<%&label%> }, %
+<%/framesep%><%#label%>label=<%&label%>, %
 <%/label%><%#maxwidth%>maxwidth=<%&maxwidth%>, %
 <%/maxwidth%><%#mincapwidth%>mincapwidth=<%&mincapwidth%>, %
 <%/mincapwidth%>pos=<%^pos%>H<%/pos%><%&pos%>, %
