@@ -7,7 +7,7 @@ Formatting tables with R for LaTeX and HTML
 
 Use `devtools` for easy installation:
 
-    devtools::install_github('format.tables', 'SwedishPensionsAgency')
+    devtools::install_github('SwedishPensionsAgency/format.tables')
     
 ## Usage 
     
@@ -17,7 +17,7 @@ Use `devtools` for easy installation:
                         names.style = "header", 
                         header=list(caption = "Caption", subcaption="subcaption")
                         )
-    cat(x$render(type="tex")
+    cat(x$render(type="tex"))
     
 
 
