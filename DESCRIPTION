@@ -7,8 +7,9 @@ Author: Cedric Perriard
 Maintainer: Cedric Perriard <cedric.perriard@pensionsmyndigheten.se>
 Description: ...
 License: MIT
-Depends:
+Depends: 
     whisker (>= 0.3-2),
     methods,
     data.table (>= 1.8.10),
     yaml (>= 2.1.7)
+Suggests: testthat
